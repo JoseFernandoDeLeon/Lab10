@@ -1,0 +1,2274 @@
+
+
+Microchip MPLAB XC8 Assembler V2.35 build 20211206165544 
+                                                                                               Sat May 07 22:06:32 2022
+
+Microchip MPLAB XC8 C Compiler v2.35 (Free license) build 20211206165544 Og1 
+     1                           	processor	16F887
+     2                           	pagewidth 120
+     3                           	opt	flic
+     4                           	psect	strings,global,class=STRING,delta=2,noexec
+     5                           	psect	stringtext,global,reloc=256,class=STRCODE,delta=2,noexec
+     6                           	psect	cinit,global,class=CODE,merge=1,delta=2
+     7                           	psect	bssBANK0,global,class=BANK0,space=1,delta=1,noexec
+     8                           	psect	cstackCOMMON,global,class=COMMON,space=1,delta=1,noexec
+     9                           	psect	cstackBANK0,global,class=BANK0,space=1,delta=1,noexec
+    10                           	psect	maintext,global,class=CODE,split=1,delta=2
+    11                           	psect	text1,local,class=CODE,merge=1,delta=2
+    12                           	psect	text2,local,class=CODE,merge=1,delta=2,group=2
+    13                           	psect	text3,local,class=CODE,merge=1,delta=2,group=2
+    14                           	psect	text4,local,class=CODE,merge=1,delta=2,group=1
+    15                           	psect	text5,local,class=CODE,merge=1,delta=2,group=1
+    16                           	psect	text6,local,class=CODE,merge=1,delta=2
+    17                           	psect	text7,local,class=CODE,merge=1,delta=2
+    18                           	psect	text8,local,class=CODE,merge=1,delta=2
+    19                           	psect	intentry,global,class=CODE,delta=2
+    20                           	psect	idloc,global,abs,ovrld,class=IDLOC,space=5,delta=2,noexec
+    21                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=2,noexec
+    22                           	dabs	1,0x7E,2
+    23  0000                     
+    24                           ; Version 2.40
+    25                           ; Generated 17/11/2021 GMT
+    26                           ; 
+    27                           ; Copyright Â© 2021, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    28                           ; All rights reserved.
+    29                           ; 
+    30                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    31                           ; 
+    32                           ; Redistribution and use in source and binary forms, with or without modification, are
+    33                           ; permitted provided that the following conditions are met:
+    34                           ; 
+    35                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    36                           ;        conditions and the following disclaimer.
+    37                           ; 
+    38                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    39                           ;        of conditions and the following disclaimer in the documentation and/or other
+    40                           ;        materials provided with the distribution. Publication is not required when
+    41                           ;        this file is used in an embedded application.
+    42                           ; 
+    43                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    44                           ;        software without specific prior written permission.
+    45                           ; 
+    46                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    47                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    48                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    49                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    50                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    51                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    52                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    53                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    54                           ; 
+    55                           ; 
+    56                           ; Code-generator required, PIC16F887 Definitions
+    57                           ; 
+    58                           ; SFR Addresses
+    59  0000                     	;# 
+    60  0001                     	;# 
+    61  0002                     	;# 
+    62  0003                     	;# 
+    63  0004                     	;# 
+    64  0005                     	;# 
+    65  0006                     	;# 
+    66  0007                     	;# 
+    67  0008                     	;# 
+    68  0009                     	;# 
+    69  000A                     	;# 
+    70  000B                     	;# 
+    71  000C                     	;# 
+    72  000D                     	;# 
+    73  000E                     	;# 
+    74  000E                     	;# 
+    75  000F                     	;# 
+    76  0010                     	;# 
+    77  0011                     	;# 
+    78  0012                     	;# 
+    79  0013                     	;# 
+    80  0014                     	;# 
+    81  0015                     	;# 
+    82  0015                     	;# 
+    83  0016                     	;# 
+    84  0017                     	;# 
+    85  0018                     	;# 
+    86  0019                     	;# 
+    87  001A                     	;# 
+    88  001B                     	;# 
+    89  001B                     	;# 
+    90  001C                     	;# 
+    91  001D                     	;# 
+    92  001E                     	;# 
+    93  001F                     	;# 
+    94  0081                     	;# 
+    95  0085                     	;# 
+    96  0086                     	;# 
+    97  0087                     	;# 
+    98  0088                     	;# 
+    99  0089                     	;# 
+   100  008C                     	;# 
+   101  008D                     	;# 
+   102  008E                     	;# 
+   103  008F                     	;# 
+   104  0090                     	;# 
+   105  0091                     	;# 
+   106  0092                     	;# 
+   107  0093                     	;# 
+   108  0093                     	;# 
+   109  0093                     	;# 
+   110  0094                     	;# 
+   111  0095                     	;# 
+   112  0096                     	;# 
+   113  0097                     	;# 
+   114  0098                     	;# 
+   115  0099                     	;# 
+   116  009A                     	;# 
+   117  009B                     	;# 
+   118  009C                     	;# 
+   119  009D                     	;# 
+   120  009E                     	;# 
+   121  009F                     	;# 
+   122  0105                     	;# 
+   123  0107                     	;# 
+   124  0108                     	;# 
+   125  0109                     	;# 
+   126  010C                     	;# 
+   127  010C                     	;# 
+   128  010D                     	;# 
+   129  010E                     	;# 
+   130  010F                     	;# 
+   131  0185                     	;# 
+   132  0187                     	;# 
+   133  0188                     	;# 
+   134  0189                     	;# 
+   135  018C                     	;# 
+   136  018D                     	;# 
+   137  0000                     	;# 
+   138  0001                     	;# 
+   139  0002                     	;# 
+   140  0003                     	;# 
+   141  0004                     	;# 
+   142  0005                     	;# 
+   143  0006                     	;# 
+   144  0007                     	;# 
+   145  0008                     	;# 
+   146  0009                     	;# 
+   147  000A                     	;# 
+   148  000B                     	;# 
+   149  000C                     	;# 
+   150  000D                     	;# 
+   151  000E                     	;# 
+   152  000E                     	;# 
+   153  000F                     	;# 
+   154  0010                     	;# 
+   155  0011                     	;# 
+   156  0012                     	;# 
+   157  0013                     	;# 
+   158  0014                     	;# 
+   159  0015                     	;# 
+   160  0015                     	;# 
+   161  0016                     	;# 
+   162  0017                     	;# 
+   163  0018                     	;# 
+   164  0019                     	;# 
+   165  001A                     	;# 
+   166  001B                     	;# 
+   167  001B                     	;# 
+   168  001C                     	;# 
+   169  001D                     	;# 
+   170  001E                     	;# 
+   171  001F                     	;# 
+   172  0081                     	;# 
+   173  0085                     	;# 
+   174  0086                     	;# 
+   175  0087                     	;# 
+   176  0088                     	;# 
+   177  0089                     	;# 
+   178  008C                     	;# 
+   179  008D                     	;# 
+   180  008E                     	;# 
+   181  008F                     	;# 
+   182  0090                     	;# 
+   183  0091                     	;# 
+   184  0092                     	;# 
+   185  0093                     	;# 
+   186  0093                     	;# 
+   187  0093                     	;# 
+   188  0094                     	;# 
+   189  0095                     	;# 
+   190  0096                     	;# 
+   191  0097                     	;# 
+   192  0098                     	;# 
+   193  0099                     	;# 
+   194  009A                     	;# 
+   195  009B                     	;# 
+   196  009C                     	;# 
+   197  009D                     	;# 
+   198  009E                     	;# 
+   199  009F                     	;# 
+   200  0105                     	;# 
+   201  0107                     	;# 
+   202  0108                     	;# 
+   203  0109                     	;# 
+   204  010C                     	;# 
+   205  010C                     	;# 
+   206  010D                     	;# 
+   207  010E                     	;# 
+   208  010F                     	;# 
+   209  0185                     	;# 
+   210  0187                     	;# 
+   211  0188                     	;# 
+   212  0189                     	;# 
+   213  018C                     	;# 
+   214  018D                     	;# 
+   215  0019                     _TXREG	set	25
+   216  000B                     _INTCONbits	set	11
+   217  0018                     _RCSTAbits	set	24
+   218  0006                     _PORTB	set	6
+   219  001E                     _ADRESH	set	30
+   220  001F                     _ADCON0bits	set	31
+   221  001A                     _RCREG	set	26
+   222  000C                     _PIR1bits	set	12
+   223  0064                     _TXIF	set	100
+   224  008C                     _PIE1bits	set	140
+   225  009F                     _ADCON1bits	set	159
+   226  009A                     _SPBRGH	set	154
+   227  0099                     _SPBRG	set	153
+   228  0098                     _TXSTAbits	set	152
+   229  008F                     _OSCCONbits	set	143
+   230  0086                     _TRISB	set	134
+   231  0187                     _BAUDCTLbits	set	391
+   232  0189                     _ANSELH	set	393
+   233  0188                     _ANSEL	set	392
+   234                           
+   235                           	psect	strings
+   236  001A                     __pstrings:
+   237  001A                     stringtab:
+   238  001A                     __stringtab:
+   239                           
+   240                           ;	String table - string pointers are 2 bytes each
+   241  001A  1BFF               	btfsc	btemp+1,7
+   242  001B  2824               	ljmp	stringcode
+   243  001C  1383               	bcf	3,7
+   244  001D  187F               	btfsc	btemp+1,0
+   245  001E  1783               	bsf	3,7
+   246  001F  0800               	movf	0,w
+   247  0020  0A84               	incf	4,f
+   248  0021  1903               	skipnz
+   249  0022  0AFF               	incf	btemp+1,f
+   250  0023  0008               	return
+   251  0024                     stringcode:
+   252  0024  087F               	movf	btemp+1,w
+   253  0025  397F               	andlw	127
+   254  0026  008A               	movwf	10
+   255  0027  0804               	movf	4,w
+   256  0028  0A84               	incf	4,f
+   257  0029  1903               	skipnz
+   258  002A  0AFF               	incf	btemp+1,f
+   259  002B  0082               	movwf	2
+   260  002C                     __stringbase:
+   261  002C                     __end_of__stringtab:
+   262                           
+   263                           	psect	stringtext
+   264  0100                     __pstringtext:
+   265  0100                     STR_8:
+   266  0100  340D               	retlw	13
+   267  0101  3420               	retlw	32	;' '
+   268  0102  3449               	retlw	73	;'I'
+   269  0103  346E               	retlw	110	;'n'
+   270  0104  3467               	retlw	103	;'g'
+   271  0105  3472               	retlw	114	;'r'
+   272  0106  3465               	retlw	101	;'e'
+   273  0107  3473               	retlw	115	;'s'
+   274  0108  3465               	retlw	101	;'e'
+   275  0109  3420               	retlw	32	;' '
+   276  010A  3475               	retlw	117	;'u'
+   277  010B  346E               	retlw	110	;'n'
+   278  010C  3420               	retlw	32	;' '
+   279  010D  3463               	retlw	99	;'c'
+   280  010E  3461               	retlw	97	;'a'
+   281  010F  3472               	retlw	114	;'r'
+   282  0110  3461               	retlw	97	;'a'
+   283  0111  3463               	retlw	99	;'c'
+   284  0112  3474               	retlw	116	;'t'
+   285  0113  3465               	retlw	101	;'e'
+   286  0114  3472               	retlw	114	;'r'
+   287  0115  3420               	retlw	32	;' '
+   288  0116  3470               	retlw	112	;'p'
+   289  0117  3461               	retlw	97	;'a'
+   290  0118  3472               	retlw	114	;'r'
+   291  0119  3461               	retlw	97	;'a'
+   292  011A  3420               	retlw	32	;' '
+   293  011B  346D               	retlw	109	;'m'
+   294  011C  346F               	retlw	111	;'o'
+   295  011D  3473               	retlw	115	;'s'
+   296  011E  3474               	retlw	116	;'t'
+   297  011F  3472               	retlw	114	;'r'
+   298  0120  3461               	retlw	97	;'a'
+   299  0121  3472               	retlw	114	;'r'
+   300  0122  3420               	retlw	32	;' '
+   301  0123  3465               	retlw	101	;'e'
+   302  0124  346E               	retlw	110	;'n'
+   303  0125  3420               	retlw	32	;' '
+   304  0126  3441               	retlw	65	;'A'
+   305  0127  3453               	retlw	83	;'S'
+   306  0128  3443               	retlw	67	;'C'
+   307  0129  3449               	retlw	73	;'I'
+   308  012A  3449               	retlw	73	;'I'
+   309  012B  3420               	retlw	32	;' '
+   310  012C  3465               	retlw	101	;'e'
+   311  012D  346C               	retlw	108	;'l'
+   312  012E  3420               	retlw	32	;' '
+   313  012F  3470               	retlw	112	;'p'
+   314  0130  3475               	retlw	117	;'u'
+   315  0131  3465               	retlw	101	;'e'
+   316  0132  3472               	retlw	114	;'r'
+   317  0133  3474               	retlw	116	;'t'
+   318  0134  346F               	retlw	111	;'o'
+   319  0135  3420               	retlw	32	;' '
+   320  0136  3442               	retlw	66	;'B'
+   321  0137  343A               	retlw	58	;':'
+   322  0138  3420               	retlw	32	;' '
+   323  0139  3400               	retlw	0
+   324  013A                     STR_1:
+   325  013A  340D               	retlw	13
+   326  013B  3420               	retlw	32	;' '
+   327  013C  342A               	retlw	42	;'*'
+   328  013D  342A               	retlw	42	;'*'
+   329  013E  342A               	retlw	42	;'*'
+   330  013F  342A               	retlw	42	;'*'
+   331  0140  342A               	retlw	42	;'*'
+   332  0141  342A               	retlw	42	;'*'
+   333  0142  342A               	retlw	42	;'*'
+   334  0143  342A               	retlw	42	;'*'
+   335  0144  342A               	retlw	42	;'*'
+   336  0145  342A               	retlw	42	;'*'
+   337  0146  342A               	retlw	42	;'*'
+   338  0147  342A               	retlw	42	;'*'
+   339  0148  342A               	retlw	42	;'*'
+   340  0149  342A               	retlw	42	;'*'
+   341  014A  342A               	retlw	42	;'*'
+   342  014B  342A               	retlw	42	;'*'
+   343  014C  342A               	retlw	42	;'*'
+   344  014D  342A               	retlw	42	;'*'
+   345  014E  342A               	retlw	42	;'*'
+   346  014F  342A               	retlw	42	;'*'
+   347  0150  342A               	retlw	42	;'*'
+   348  0151  342A               	retlw	42	;'*'
+   349  0152  342A               	retlw	42	;'*'
+   350  0153  342A               	retlw	42	;'*'
+   351  0154  342A               	retlw	42	;'*'
+   352  0155  342A               	retlw	42	;'*'
+   353  0156  342A               	retlw	42	;'*'
+   354  0157  342A               	retlw	42	;'*'
+   355  0158  342A               	retlw	42	;'*'
+   356  0159  342A               	retlw	42	;'*'
+   357  015A  342A               	retlw	42	;'*'
+   358  015B  342A               	retlw	42	;'*'
+   359  015C  342A               	retlw	42	;'*'
+   360  015D  342A               	retlw	42	;'*'
+   361  015E  342A               	retlw	42	;'*'
+   362  015F  342A               	retlw	42	;'*'
+   363  0160  342A               	retlw	42	;'*'
+   364  0161  3420               	retlw	32	;' '
+   365  0162  3420               	retlw	32	;' '
+   366  0163  340D               	retlw	13
+   367  0164  3400               	retlw	0
+   368  0165                     STR_2:
+   369  0165  340D               	retlw	13
+   370  0166  3420               	retlw	32	;' '
+   371  0167  3442               	retlw	66	;'B'
+   372  0168  3469               	retlw	105	;'i'
+   373  0169  3465               	retlw	101	;'e'
+   374  016A  346E               	retlw	110	;'n'
+   375  016B  3476               	retlw	118	;'v'
+   376  016C  3465               	retlw	101	;'e'
+   377  016D  346E               	retlw	110	;'n'
+   378  016E  3469               	retlw	105	;'i'
+   379  016F  3464               	retlw	100	;'d'
+   380  0170  346F               	retlw	111	;'o'
+   381  0171  342C               	retlw	44	;','
+   382  0172  3420               	retlw	32	;' '
+   383  0173  3471               	retlw	113	;'q'
+   384  0174  3475               	retlw	117	;'u'
+   385  0175  3465               	retlw	101	;'e'
+   386  0176  3420               	retlw	32	;' '
+   387  0177  3461               	retlw	97	;'a'
+   388  0178  3463               	retlw	99	;'c'
+   389  0179  3463               	retlw	99	;'c'
+   390  017A  3469               	retlw	105	;'i'
+   391  017B  346F               	retlw	111	;'o'
+   392  017C  346E               	retlw	110	;'n'
+   393  017D  3420               	retlw	32	;' '
+   394  017E  3464               	retlw	100	;'d'
+   395  017F  3465               	retlw	101	;'e'
+   396  0180  3473               	retlw	115	;'s'
+   397  0181  3465               	retlw	101	;'e'
+   398  0182  3461               	retlw	97	;'a'
+   399  0183  3420               	retlw	32	;' '
+   400  0184  3472               	retlw	114	;'r'
+   401  0185  3465               	retlw	101	;'e'
+   402  0186  3461               	retlw	97	;'a'
+   403  0187  346C               	retlw	108	;'l'
+   404  0188  3469               	retlw	105	;'i'
+   405  0189  347A               	retlw	122	;'z'
+   406  018A  3461               	retlw	97	;'a'
+   407  018B  3472               	retlw	114	;'r'
+   408  018C  343F               	retlw	63	;'?'
+   409  018D  3420               	retlw	32	;' '
+   410  018E  340D               	retlw	13
+   411  018F  3400               	retlw	0
+   412  0190                     STR_6:
+   413  0190  340D               	retlw	13
+   414  0191  3420               	retlw	32	;' '
+   415  0192  3445               	retlw	69	;'E'
+   416  0193  346C               	retlw	108	;'l'
+   417  0194  3420               	retlw	32	;' '
+   418  0195  3476               	retlw	118	;'v'
+   419  0196  3461               	retlw	97	;'a'
+   420  0197  346C               	retlw	108	;'l'
+   421  0198  346F               	retlw	111	;'o'
+   422  0199  3472               	retlw	114	;'r'
+   423  019A  3420               	retlw	32	;' '
+   424  019B  3464               	retlw	100	;'d'
+   425  019C  3465               	retlw	101	;'e'
+   426  019D  346C               	retlw	108	;'l'
+   427  019E  3420               	retlw	32	;' '
+   428  019F  3470               	retlw	112	;'p'
+   429  01A0  346F               	retlw	111	;'o'
+   430  01A1  3474               	retlw	116	;'t'
+   431  01A2  3465               	retlw	101	;'e'
+   432  01A3  346E               	retlw	110	;'n'
+   433  01A4  3463               	retlw	99	;'c'
+   434  01A5  3469               	retlw	105	;'i'
+   435  01A6  34F3               	retlw	-13
+   436  01A7  346D               	retlw	109	;'m'
+   437  01A8  3465               	retlw	101	;'e'
+   438  01A9  3474               	retlw	116	;'t'
+   439  01AA  3472               	retlw	114	;'r'
+   440  01AB  346F               	retlw	111	;'o'
+   441  01AC  3420               	retlw	32	;' '
+   442  01AD  3465               	retlw	101	;'e'
+   443  01AE  3473               	retlw	115	;'s'
+   444  01AF  3420               	retlw	32	;' '
+   445  01B0  340D               	retlw	13
+   446  01B1  3400               	retlw	0
+   447  01B2                     STR_4:
+   448  01B2  3420               	retlw	32	;' '
+   449  01B3  3432               	retlw	50	;'2'
+   450  01B4  3429               	retlw	41	;')'
+   451  01B5  3420               	retlw	32	;' '
+   452  01B6  3444               	retlw	68	;'D'
+   453  01B7  3465               	retlw	101	;'e'
+   454  01B8  3473               	retlw	115	;'s'
+   455  01B9  3470               	retlw	112	;'p'
+   456  01BA  346C               	retlw	108	;'l'
+   457  01BB  3465               	retlw	101	;'e'
+   458  01BC  3467               	retlw	103	;'g'
+   459  01BD  3461               	retlw	97	;'a'
+   460  01BE  3472               	retlw	114	;'r'
+   461  01BF  3420               	retlw	32	;' '
+   462  01C0  3476               	retlw	118	;'v'
+   463  01C1  3461               	retlw	97	;'a'
+   464  01C2  346C               	retlw	108	;'l'
+   465  01C3  346F               	retlw	111	;'o'
+   466  01C4  3472               	retlw	114	;'r'
+   467  01C5  3420               	retlw	32	;' '
+   468  01C6  3441               	retlw	65	;'A'
+   469  01C7  3453               	retlw	83	;'S'
+   470  01C8  3443               	retlw	67	;'C'
+   471  01C9  3449               	retlw	73	;'I'
+   472  01CA  3449               	retlw	73	;'I'
+   473  01CB  340D               	retlw	13
+   474  01CC  3400               	retlw	0
+   475  01CD                     STR_3:
+   476  01CD  3420               	retlw	32	;' '
+   477  01CE  3431               	retlw	49	;'1'
+   478  01CF  3429               	retlw	41	;')'
+   479  01D0  3420               	retlw	32	;' '
+   480  01D1  344C               	retlw	76	;'L'
+   481  01D2  3465               	retlw	101	;'e'
+   482  01D3  3465               	retlw	101	;'e'
+   483  01D4  3472               	retlw	114	;'r'
+   484  01D5  3420               	retlw	32	;' '
+   485  01D6  3450               	retlw	80	;'P'
+   486  01D7  346F               	retlw	111	;'o'
+   487  01D8  3474               	retlw	116	;'t'
+   488  01D9  3465               	retlw	101	;'e'
+   489  01DA  346E               	retlw	110	;'n'
+   490  01DB  3463               	retlw	99	;'c'
+   491  01DC  3469               	retlw	105	;'i'
+   492  01DD  346F               	retlw	111	;'o'
+   493  01DE  346D               	retlw	109	;'m'
+   494  01DF  3465               	retlw	101	;'e'
+   495  01E0  3474               	retlw	116	;'t'
+   496  01E1  3472               	retlw	114	;'r'
+   497  01E2  346F               	retlw	111	;'o'
+   498  01E3  3420               	retlw	32	;' '
+   499  01E4  340D               	retlw	13
+   500  01E5  3400               	retlw	0
+   501  01E6                     STR_7:
+   502  01E6  340D               	retlw	13
+   503  01E7  3420               	retlw	32	;' '
+   504  01E8  344C               	retlw	76	;'L'
+   505  01E9  3469               	retlw	105	;'i'
+   506  01EA  3473               	retlw	115	;'s'
+   507  01EB  3474               	retlw	116	;'t'
+   508  01EC  346F               	retlw	111	;'o'
+   509  01ED  3420               	retlw	32	;' '
+   510  01EE  340D               	retlw	13
+   511  01EF  3400               	retlw	0
+   512  01F0                     STR_10:
+   513  01F0  3445               	retlw	69	;'E'
+   514  01F1  3472               	retlw	114	;'r'
+   515  01F2  3472               	retlw	114	;'r'
+   516  01F3  346F               	retlw	111	;'o'
+   517  01F4  3472               	retlw	114	;'r'
+   518  01F5  3420               	retlw	32	;' '
+   519  01F6  340D               	retlw	13
+   520  01F7  3400               	retlw	0
+   521  013A                     
+   522                           	psect	cinit
+   523  000F                     start_initialization:	
+   524                           ; #config settings
+   525                           
+   526  000F                     __initialization:
+   527                           
+   528                           ; Clear objects allocated to BANK0
+   529  000F  1283               	bcf	3,5	;RP0=0, select bank0
+   530  0010  1303               	bcf	3,6	;RP1=0, select bank0
+   531  0011  01B1               	clrf	__pbssBANK0& (0+127)
+   532  0012  01B2               	clrf	(__pbssBANK0+1)& (0+127)
+   533  0013  01B3               	clrf	(__pbssBANK0+2)& (0+127)
+   534  0014  01B4               	clrf	(__pbssBANK0+3)& (0+127)
+   535  0015  01B5               	clrf	(__pbssBANK0+4)& (0+127)
+   536  0016                     end_of_initialization:	
+   537                           ;End of C runtime variable initialization code
+   538                           
+   539  0016                     __end_of__initialization:
+   540  0016  0183               	clrf	3
+   541  0017  120A  118A  29F8   	ljmp	_main	;jump to C main() function
+   542                           
+   543                           	psect	bssBANK0
+   544  0031                     __pbssBANK0:
+   545  0031                     _pot:
+   546  0031                     	ds	1
+   547  0032                     _RX:
+   548  0032                     	ds	1
+   549  0033                     _selection:
+   550  0033                     	ds	1
+   551  0034                     _flag:
+   552  0034                     	ds	1
+   553  0035                     _pot_char:
+   554  0035                     	ds	1
+   555                           
+   556                           	psect	cstackCOMMON
+   557  0070                     __pcstackCOMMON:
+   558  0070                     ?_setup:
+   559  0070                     ?_desplegar:	
+   560                           ; 1 bytes @ 0x0
+   561                           
+   562  0070                     ?_isr:	
+   563                           ; 1 bytes @ 0x0
+   564                           
+   565  0070                     ??_isr:	
+   566                           ; 1 bytes @ 0x0
+   567                           
+   568  0070                     ?_main:	
+   569                           ; 1 bytes @ 0x0
+   570                           
+   571                           
+   572                           ; 1 bytes @ 0x0
+   573  0070                     	ds	3
+   574  0073                     ??_setup:
+   575  0073                     ?_Print:	
+   576                           ; 1 bytes @ 0x3
+   577                           
+   578  0073                     ??_desplegar:	
+   579                           ; 1 bytes @ 0x3
+   580                           
+   581  0073                     ?___lwdiv:	
+   582                           ; 1 bytes @ 0x3
+   583                           
+   584  0073                     ?___lwmod:	
+   585                           ; 2 bytes @ 0x3
+   586                           
+   587  0073                     desplegar@selection:	
+   588                           ; 2 bytes @ 0x3
+   589                           
+   590  0073                     Print@word:	
+   591                           ; 1 bytes @ 0x3
+   592                           
+   593  0073                     ___lwdiv@divisor:	
+   594                           ; 2 bytes @ 0x3
+   595                           
+   596  0073                     ___lwmod@divisor:	
+   597                           ; 2 bytes @ 0x3
+   598                           
+   599                           
+   600                           ; 2 bytes @ 0x3
+   601  0073                     	ds	2
+   602  0075                     ??_Print:
+   603  0075                     ___lwdiv@dividend:	
+   604                           ; 1 bytes @ 0x5
+   605                           
+   606  0075                     ___lwmod@dividend:	
+   607                           ; 2 bytes @ 0x5
+   608                           
+   609                           
+   610                           ; 2 bytes @ 0x5
+   611  0075                     	ds	2
+   612  0077                     ??___lwdiv:
+   613  0077                     ??___lwmod:	
+   614                           ; 1 bytes @ 0x7
+   615                           
+   616                           
+   617                           ; 1 bytes @ 0x7
+   618  0077                     	ds	1
+   619  0078                     ___lwmod@counter:
+   620  0078                     ___lwdiv@quotient:	
+   621                           ; 1 bytes @ 0x8
+   622                           
+   623                           
+   624                           ; 2 bytes @ 0x8
+   625  0078                     	ds	2
+   626  007A                     ___lwdiv@counter:
+   627                           
+   628                           ; 1 bytes @ 0xA
+   629  007A                     	ds	1
+   630                           
+   631                           	psect	cstackBANK0
+   632  0020                     __pcstackBANK0:
+   633  0020                     ?_utoa:
+   634  0020                     utoa@val:	
+   635                           ; 1 bytes @ 0x0
+   636                           
+   637                           
+   638                           ; 2 bytes @ 0x0
+   639  0020                     	ds	2
+   640  0022                     utoa@base:
+   641                           
+   642                           ; 2 bytes @ 0x2
+   643  0022                     	ds	2
+   644  0024                     ??_utoa:
+   645                           
+   646                           ; 1 bytes @ 0x4
+   647  0024                     	ds	1
+   648  0025                     utoa@v:
+   649                           
+   650                           ; 2 bytes @ 0x5
+   651  0025                     	ds	2
+   652  0027                     utoa@c:
+   653                           
+   654                           ; 1 bytes @ 0x7
+   655  0027                     	ds	1
+   656  0028                     utoa@buf:
+   657                           
+   658                           ; 1 bytes @ 0x8
+   659  0028                     	ds	1
+   660  0029                     ?_itoa:
+   661  0029                     itoa@val:	
+   662                           ; 1 bytes @ 0x9
+   663                           
+   664                           
+   665                           ; 2 bytes @ 0x9
+   666  0029                     	ds	2
+   667  002B                     itoa@base:
+   668                           
+   669                           ; 2 bytes @ 0xB
+   670  002B                     	ds	2
+   671  002D                     ??_itoa:
+   672                           
+   673                           ; 1 bytes @ 0xD
+   674  002D                     	ds	1
+   675  002E                     itoa@buf:
+   676                           
+   677                           ; 1 bytes @ 0xE
+   678  002E                     	ds	1
+   679  002F                     ??_main:
+   680                           
+   681                           ; 1 bytes @ 0xF
+   682  002F                     	ds	2
+   683                           
+   684                           	psect	maintext
+   685  01F8                     __pmaintext:	
+   686 ;;
+   687 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   688 ;;
+   689 ;; *************** function _main *****************
+   690 ;; Defined at:
+   691 ;;		line 88 in file "postlab.c"
+   692 ;; Parameters:    Size  Location     Type
+   693 ;;		None
+   694 ;; Auto vars:     Size  Location     Type
+   695 ;;		None
+   696 ;; Return value:  Size  Location     Type
+   697 ;;                  1    wreg      void 
+   698 ;; Registers used:
+   699 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   700 ;; Tracked objects:
+   701 ;;		On entry : B00/0
+   702 ;;		On exit  : 0/0
+   703 ;;		Unchanged: 0/0
+   704 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   705 ;;      Params:         0       0       0       0       0
+   706 ;;      Locals:         0       0       0       0       0
+   707 ;;      Temps:          0       2       0       0       0
+   708 ;;      Totals:         0       2       0       0       0
+   709 ;;Total ram usage:        2 bytes
+   710 ;; Hardware stack levels required when called: 4
+   711 ;; This function calls:
+   712 ;;		_Print
+   713 ;;		_desplegar
+   714 ;;		_itoa
+   715 ;;		_setup
+   716 ;; This function is called by:
+   717 ;;		Startup code after reset
+   718 ;; This function uses a non-reentrant model
+   719 ;;
+   720                           
+   721  01F8                     _main:	
+   722                           ;psect for function _main
+   723                           
+   724  01F8                     l1107:	
+   725                           ;incstack = 0
+   726                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   727                           
+   728                           
+   729                           ;postlab.c: 89:     setup();
+   730  01F8  120A  118A  236A  120A  118A  	fcall	_setup
+   731  01FD                     l1109:
+   732                           
+   733                           ;postlab.c: 92:         if(ADCON0bits.GO == 0){
+   734  01FD  1283               	bcf	3,5	;RP0=0, select bank0
+   735  01FE  1303               	bcf	3,6	;RP1=0, select bank0
+   736  01FF  189F               	btfsc	31,1	;volatile
+   737  0200  2A02               	goto	u511
+   738  0201  2A03               	goto	u510
+   739  0202                     u511:
+   740  0202  2A04               	goto	l1113
+   741  0203                     u510:
+   742  0203                     l1111:
+   743                           
+   744                           ;postlab.c: 94:             ADCON0bits.GO = 1;
+   745  0203  149F               	bsf	31,1	;volatile
+   746  0204                     l1113:
+   747                           
+   748                           ;postlab.c: 97:         Print("\r *************************************  \r");
+   749  0204  303A               	movlw	low (STR_1| (0+32768))
+   750  0205  00F3               	movwf	Print@word
+   751  0206  3081               	movlw	high (STR_1| (0+32768))
+   752  0207  00F4               	movwf	Print@word+1
+   753  0208  120A  118A  240D  120A  118A  	fcall	_Print
+   754                           
+   755                           ;postlab.c: 98:         Print("\r Bienvenido, que accion desea realizar? \r");
+   756  020D  3065               	movlw	low (STR_2| (0+32768))
+   757  020E  00F3               	movwf	Print@word
+   758  020F  3081               	movlw	high (STR_2| (0+32768))
+   759  0210  00F4               	movwf	Print@word+1
+   760  0211  120A  118A  240D  120A  118A  	fcall	_Print
+   761                           
+   762                           ;postlab.c: 99:         Print(" 1) Leer Potenciometro \r");
+   763  0216  30CD               	movlw	low (STR_3| (0+32768))
+   764  0217  00F3               	movwf	Print@word
+   765  0218  3081               	movlw	high (STR_3| (0+32768))
+   766  0219  00F4               	movwf	Print@word+1
+   767  021A  120A  118A  240D  120A  118A  	fcall	_Print
+   768                           
+   769                           ;postlab.c: 100:         Print(" 2) Desplegar valor ASCII\r");
+   770  021F  30B2               	movlw	low (STR_4| (0+32768))
+   771  0220  00F3               	movwf	Print@word
+   772  0221  3081               	movlw	high (STR_4| (0+32768))
+   773  0222  00F4               	movwf	Print@word+1
+   774  0223  120A  118A  240D  120A  118A  	fcall	_Print
+   775                           
+   776                           ;postlab.c: 101:         Print("\r *************************************  \r");
+   777  0228  303A               	movlw	low (STR_1| (0+32768))
+   778  0229  00F3               	movwf	Print@word
+   779  022A  3081               	movlw	high (STR_1| (0+32768))
+   780  022B  00F4               	movwf	Print@word+1
+   781  022C  120A  118A  240D  120A  118A  	fcall	_Print
+   782  0231                     l1115:
+   783                           
+   784                           ;postlab.c: 103:         flag = 1;
+   785  0231  1283               	bcf	3,5	;RP0=0, select bank0
+   786  0232  1303               	bcf	3,6	;RP1=0, select bank0
+   787  0233  01B4               	clrf	_flag
+   788  0234  0AB4               	incf	_flag,f
+   789                           
+   790                           ;postlab.c: 105:         while (flag) {
+   791  0235  2AA9               	goto	l1143
+   792  0236                     l75:
+   793  0236  1E8C               	btfss	12,5	;volatile
+   794  0237  2A39               	goto	u521
+   795  0238  2A3A               	goto	u520
+   796  0239                     u521:
+   797  0239  2A36               	goto	l75
+   798  023A                     u520:
+   799  023A                     l1117:
+   800                           
+   801                           ;postlab.c: 109:             selection = RX;
+   802  023A  0832               	movf	_RX,w
+   803  023B  00AF               	movwf	??_main
+   804  023C  082F               	movf	??_main,w
+   805  023D  00B3               	movwf	_selection
+   806                           
+   807                           ;postlab.c: 111:             switch (selection) {
+   808  023E  2A99               	goto	l1141
+   809  023F                     l1119:
+   810                           
+   811                           ;postlab.c: 113:                     Print("\r El valor del potenciómetro es \r");
+   812  023F  3090               	movlw	low (STR_6| (0+32768))
+   813  0240  00F3               	movwf	Print@word
+   814  0241  3081               	movlw	high (STR_6| (0+32768))
+   815  0242  00F4               	movwf	Print@word+1
+   816  0243  120A  118A  240D  120A  118A  	fcall	_Print
+   817  0248                     l1121:
+   818                           
+   819                           ;postlab.c: 114:                     itoa(pot_char,pot,10);
+   820  0248  1283               	bcf	3,5	;RP0=0, select bank0
+   821  0249  1303               	bcf	3,6	;RP1=0, select bank0
+   822  024A  0831               	movf	_pot,w
+   823  024B  00AF               	movwf	??_main
+   824  024C  01B0               	clrf	??_main+1
+   825  024D  082F               	movf	??_main,w
+   826  024E  00A9               	movwf	itoa@val
+   827  024F  0830               	movf	??_main+1,w
+   828  0250  00AA               	movwf	itoa@val+1
+   829  0251  300A               	movlw	10
+   830  0252  00AB               	movwf	itoa@base
+   831  0253  3000               	movlw	0
+   832  0254  00AC               	movwf	itoa@base+1
+   833  0255  3035               	movlw	(low (_pot_char| 0))& (0+255)
+   834  0256  120A  118A  23E7  120A  118A  	fcall	_itoa
+   835  025B                     l1123:
+   836                           
+   837                           ;postlab.c: 115:                     desplegar(pot_char);
+   838  025B  3035               	movlw	(low _pot_char)& (0+255)
+   839  025C  120A  118A  2456  120A  118A  	fcall	_desplegar
+   840  0261                     l1125:
+   841                           
+   842                           ;postlab.c: 116:                     Print("\r Listo \r");
+   843  0261  30E6               	movlw	low (STR_7| (0+32768))
+   844  0262  00F3               	movwf	Print@word
+   845  0263  3081               	movlw	high (STR_7| (0+32768))
+   846  0264  00F4               	movwf	Print@word+1
+   847  0265  120A  118A  240D  120A  118A  	fcall	_Print
+   848  026A                     l1127:
+   849                           
+   850                           ;postlab.c: 117:                     flag = 0;
+   851  026A  1283               	bcf	3,5	;RP0=0, select bank0
+   852  026B  1303               	bcf	3,6	;RP1=0, select bank0
+   853  026C  01B4               	clrf	_flag
+   854                           
+   855                           ;postlab.c: 118:                     break;
+   856  026D  2AA9               	goto	l1143
+   857  026E                     l1129:
+   858                           
+   859                           ;postlab.c: 121:                     Print("\r Ingrese un caracter para mostrar en ASCII
+      +                           el puerto B: ");
+   860  026E  3000               	movlw	low (STR_8| (0+32768))
+   861  026F  00F3               	movwf	Print@word
+   862  0270  3081               	movlw	high (STR_8| (0+32768))
+   863  0271  00F4               	movwf	Print@word+1
+   864  0272  120A  118A  240D  120A  118A  	fcall	_Print
+   865  0277                     l82:	
+   866                           ;postlab.c: 122:                     while (PIR1bits.RCIF == 0);
+   867                           
+   868  0277  1283               	bcf	3,5	;RP0=0, select bank0
+   869  0278  1303               	bcf	3,6	;RP1=0, select bank0
+   870  0279  1E8C               	btfss	12,5	;volatile
+   871  027A  2A7C               	goto	u531
+   872  027B  2A7D               	goto	u530
+   873  027C                     u531:
+   874  027C  2A77               	goto	l82
+   875  027D                     u530:
+   876  027D                     l1131:
+   877                           
+   878                           ;postlab.c: 123:                     PORTB = RX;
+   879  027D  0832               	movf	_RX,w
+   880  027E  0086               	movwf	6	;volatile
+   881  027F                     l1133:
+   882                           
+   883                           ;postlab.c: 124:                     desplegar(RX);
+   884  027F  0832               	movf	_RX,w
+   885  0280  120A  118A  2456  120A  118A  	fcall	_desplegar
+   886  0285                     l1135:
+   887                           
+   888                           ;postlab.c: 125:                     Print("\r Listo \r");
+   889  0285  30E6               	movlw	low (STR_7| (0+32768))
+   890  0286  00F3               	movwf	Print@word
+   891  0287  3081               	movlw	high (STR_7| (0+32768))
+   892  0288  00F4               	movwf	Print@word+1
+   893  0289  120A  118A  240D  120A  118A  	fcall	_Print
+   894  028E  2A6A               	goto	l1127
+   895  028F                     l1139:
+   896                           
+   897                           ;postlab.c: 130:                     Print("Error \r");
+   898  028F  30F0               	movlw	low (STR_10| (0+32768))
+   899  0290  00F3               	movwf	Print@word
+   900  0291  3081               	movlw	high (STR_10| (0+32768))
+   901  0292  00F4               	movwf	Print@word+1
+   902  0293  120A  118A  240D  120A  118A  	fcall	_Print
+   903                           
+   904                           ;postlab.c: 132:             }
+   905  0298  2AA9               	goto	l1143
+   906  0299                     l1141:
+   907  0299  0833               	movf	_selection,w
+   908  029A  00AF               	movwf	??_main
+   909  029B  01B0               	clrf	??_main+1
+   910                           
+   911                           ; Switch on 2 bytes has been partitioned into a top level switch of size 1, and 1 sub-sw
+      +                          itches
+   912                           ; Switch size 1, requested type "simple"
+   913                           ; Number of cases is 1, Range of values is 0 to 0
+   914                           ; switch strategies available:
+   915                           ; Name         Instructions Cycles
+   916                           ; simple_byte            4     3 (average)
+   917                           ; direct_byte           11     8 (fixed)
+   918                           ; jumptable            260     6 (fixed)
+   919                           ;	Chosen strategy is simple_byte
+   920  029C  0830               	movf	??_main+1,w
+   921  029D  3A00               	xorlw	0	; case 0
+   922  029E  1903               	skipnz
+   923  029F  2AA1               	goto	l1169
+   924  02A0  2A8F               	goto	l1139
+   925  02A1                     l1169:
+   926                           
+   927                           ; Switch size 1, requested type "simple"
+   928                           ; Number of cases is 2, Range of values is 49 to 50
+   929                           ; switch strategies available:
+   930                           ; Name         Instructions Cycles
+   931                           ; simple_byte            7     4 (average)
+   932                           ; direct_byte           17    11 (fixed)
+   933                           ; jumptable            263     9 (fixed)
+   934                           ;	Chosen strategy is simple_byte
+   935  02A1  082F               	movf	??_main,w
+   936  02A2  3A31               	xorlw	49	; case 49
+   937  02A3  1903               	skipnz
+   938  02A4  2A3F               	goto	l1119
+   939  02A5  3A03               	xorlw	3	; case 50
+   940  02A6  1903               	skipnz
+   941  02A7  2A6E               	goto	l1129
+   942  02A8  2A8F               	goto	l1139
+   943  02A9                     l1143:
+   944                           
+   945                           ;postlab.c: 105:         while (flag) {
+   946  02A9  1283               	bcf	3,5	;RP0=0, select bank0
+   947  02AA  1303               	bcf	3,6	;RP1=0, select bank0
+   948  02AB  0834               	movf	_flag,w
+   949  02AC  1D03               	btfss	3,2
+   950  02AD  2AAF               	goto	u541
+   951  02AE  2AB0               	goto	u540
+   952  02AF                     u541:
+   953  02AF  2A36               	goto	l75
+   954  02B0                     u540:
+   955  02B0  29FD               	goto	l1109
+   956  02B1  120A  118A  280C   	ljmp	start
+   957  02B4                     __end_of_main:
+   958                           
+   959                           	psect	text1
+   960  036A                     __ptext1:	
+   961 ;; *************** function _setup *****************
+   962 ;; Defined at:
+   963 ;;		line 141 in file "postlab.c"
+   964 ;; Parameters:    Size  Location     Type
+   965 ;;		None
+   966 ;; Auto vars:     Size  Location     Type
+   967 ;;		None
+   968 ;; Return value:  Size  Location     Type
+   969 ;;                  1    wreg      void 
+   970 ;; Registers used:
+   971 ;;		wreg, status,2, status,0
+   972 ;; Tracked objects:
+   973 ;;		On entry : 0/0
+   974 ;;		On exit  : 0/0
+   975 ;;		Unchanged: 0/0
+   976 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   977 ;;      Params:         0       0       0       0       0
+   978 ;;      Locals:         0       0       0       0       0
+   979 ;;      Temps:          1       0       0       0       0
+   980 ;;      Totals:         1       0       0       0       0
+   981 ;;Total ram usage:        1 bytes
+   982 ;; Hardware stack levels used: 1
+   983 ;; Hardware stack levels required when called: 1
+   984 ;; This function calls:
+   985 ;;		Nothing
+   986 ;; This function is called by:
+   987 ;;		_main
+   988 ;; This function uses a non-reentrant model
+   989 ;;
+   990                           
+   991  036A                     _setup:	
+   992                           ;psect for function _setup
+   993                           
+   994  036A                     l1019:	
+   995                           ;incstack = 0
+   996                           ; Regs used in _setup: [wreg+status,2+status,0]
+   997                           
+   998                           
+   999                           ;postlab.c: 144:     ANSEL = 0b00000001;
+  1000  036A  3001               	movlw	1
+  1001  036B  1683               	bsf	3,5	;RP0=1, select bank3
+  1002  036C  1703               	bsf	3,6	;RP1=1, select bank3
+  1003  036D  0088               	movwf	8	;volatile
+  1004  036E                     l1021:
+  1005                           
+  1006                           ;postlab.c: 145:     ANSELH = 0;
+  1007  036E  0189               	clrf	9	;volatile
+  1008  036F                     l1023:
+  1009                           
+  1010                           ;postlab.c: 148:     TRISB = 0;
+  1011  036F  1683               	bsf	3,5	;RP0=1, select bank1
+  1012  0370  1303               	bcf	3,6	;RP1=0, select bank1
+  1013  0371  0186               	clrf	6	;volatile
+  1014  0372                     l1025:
+  1015                           
+  1016                           ;postlab.c: 149:     PORTB = 0;
+  1017  0372  1283               	bcf	3,5	;RP0=0, select bank0
+  1018  0373  1303               	bcf	3,6	;RP1=0, select bank0
+  1019  0374  0186               	clrf	6	;volatile
+  1020  0375                     l1027:
+  1021                           
+  1022                           ;postlab.c: 152:     OSCCONbits.IRCF = 0b0100;
+  1023  0375  1683               	bsf	3,5	;RP0=1, select bank1
+  1024  0376  1303               	bcf	3,6	;RP1=0, select bank1
+  1025  0377  080F               	movf	15,w	;volatile
+  1026  0378  398F               	andlw	-113
+  1027  0379  3840               	iorlw	64
+  1028  037A  008F               	movwf	15	;volatile
+  1029  037B                     l1029:
+  1030                           
+  1031                           ;postlab.c: 153:     OSCCONbits.SCS = 1;
+  1032  037B  140F               	bsf	15,0	;volatile
+  1033  037C                     l1031:
+  1034                           
+  1035                           ;postlab.c: 157:     TXSTAbits.SYNC = 0;
+  1036  037C  1218               	bcf	24,4	;volatile
+  1037  037D                     l1033:
+  1038                           
+  1039                           ;postlab.c: 158:     TXSTAbits.BRGH = 1;
+  1040  037D  1518               	bsf	24,2	;volatile
+  1041  037E                     l1035:
+  1042                           
+  1043                           ;postlab.c: 159:     BAUDCTLbits.BRG16 = 1;
+  1044  037E  1683               	bsf	3,5	;RP0=1, select bank3
+  1045  037F  1703               	bsf	3,6	;RP1=1, select bank3
+  1046  0380  1587               	bsf	7,3	;volatile
+  1047  0381                     l1037:
+  1048                           
+  1049                           ;postlab.c: 161:     SPBRG = 25;
+  1050  0381  3019               	movlw	25
+  1051  0382  1683               	bsf	3,5	;RP0=1, select bank1
+  1052  0383  1303               	bcf	3,6	;RP1=0, select bank1
+  1053  0384  0099               	movwf	25	;volatile
+  1054  0385                     l1039:
+  1055                           
+  1056                           ;postlab.c: 162:     SPBRGH = 0;
+  1057  0385  019A               	clrf	26	;volatile
+  1058  0386                     l1041:
+  1059                           
+  1060                           ;postlab.c: 164:     RCSTAbits.SPEN = 1;
+  1061  0386  1283               	bcf	3,5	;RP0=0, select bank0
+  1062  0387  1303               	bcf	3,6	;RP1=0, select bank0
+  1063  0388  1798               	bsf	24,7	;volatile
+  1064  0389                     l1043:
+  1065                           
+  1066                           ;postlab.c: 165:     TXSTAbits.TX9 = 0;
+  1067  0389  1683               	bsf	3,5	;RP0=1, select bank1
+  1068  038A  1303               	bcf	3,6	;RP1=0, select bank1
+  1069  038B  1318               	bcf	24,6	;volatile
+  1070  038C                     l1045:
+  1071                           
+  1072                           ;postlab.c: 166:     TXSTAbits.TXEN = 1;
+  1073  038C  1698               	bsf	24,5	;volatile
+  1074  038D                     l1047:
+  1075                           
+  1076                           ;postlab.c: 167:     RCSTAbits.CREN = 1;
+  1077  038D  1283               	bcf	3,5	;RP0=0, select bank0
+  1078  038E  1303               	bcf	3,6	;RP1=0, select bank0
+  1079  038F  1618               	bsf	24,4	;volatile
+  1080  0390                     l1049:
+  1081                           
+  1082                           ;postlab.c: 170:     ADCON1bits.ADFM = 0;
+  1083  0390  1683               	bsf	3,5	;RP0=1, select bank1
+  1084  0391  1303               	bcf	3,6	;RP1=0, select bank1
+  1085  0392  139F               	bcf	31,7	;volatile
+  1086  0393                     l1051:
+  1087                           
+  1088                           ;postlab.c: 171:     ADCON1bits.VCFG0 = 0;
+  1089  0393  121F               	bcf	31,4	;volatile
+  1090  0394                     l1053:
+  1091                           
+  1092                           ;postlab.c: 172:     ADCON1bits.VCFG1 = 0;
+  1093  0394  129F               	bcf	31,5	;volatile
+  1094                           
+  1095                           ;postlab.c: 174:     ADCON0bits.ADCS = 0b01;
+  1096  0395  1283               	bcf	3,5	;RP0=0, select bank0
+  1097  0396  1303               	bcf	3,6	;RP1=0, select bank0
+  1098  0397  081F               	movf	31,w	;volatile
+  1099  0398  393F               	andlw	-193
+  1100  0399  3840               	iorlw	64
+  1101  039A  009F               	movwf	31	;volatile
+  1102                           
+  1103                           ;postlab.c: 175:     ADCON0bits.CHS = 0b0000;
+  1104  039B  30C3               	movlw	-61
+  1105  039C  059F               	andwf	31,f	;volatile
+  1106  039D                     l1055:
+  1107                           
+  1108                           ;postlab.c: 177:     ADCON0bits.ADON = 1;
+  1109  039D  141F               	bsf	31,0	;volatile
+  1110  039E                     l1057:
+  1111                           
+  1112                           ;postlab.c: 178:     _delay((unsigned long)((50)*(1000000/4000000.0)));
+  1113  039E  3003               	movlw	3
+  1114  039F  00F3               	movwf	??_setup
+  1115  03A0                     u557:
+  1116  03A0  0BF3               	decfsz	??_setup,f
+  1117  03A1  2BA0               	goto	u557
+  1118  03A2  2BA3               	nop2
+  1119  03A3                     l1059:
+  1120                           
+  1121                           ;postlab.c: 181:     INTCONbits.GIE = 1;
+  1122  03A3  178B               	bsf	11,7	;volatile
+  1123  03A4                     l1061:
+  1124                           
+  1125                           ;postlab.c: 182:     INTCONbits.PEIE = 1;
+  1126  03A4  170B               	bsf	11,6	;volatile
+  1127  03A5                     l1063:
+  1128                           
+  1129                           ;postlab.c: 184:     PIE1bits.ADIE = 1;
+  1130  03A5  1683               	bsf	3,5	;RP0=1, select bank1
+  1131  03A6  1303               	bcf	3,6	;RP1=0, select bank1
+  1132  03A7  170C               	bsf	12,6	;volatile
+  1133  03A8                     l1065:
+  1134                           
+  1135                           ;postlab.c: 185:     PIE1bits.RCIE = 1;
+  1136  03A8  168C               	bsf	12,5	;volatile
+  1137  03A9                     l1067:
+  1138                           
+  1139                           ;postlab.c: 187:     PIR1bits.ADIF = 0;
+  1140  03A9  1283               	bcf	3,5	;RP0=0, select bank0
+  1141  03AA  1303               	bcf	3,6	;RP1=0, select bank0
+  1142  03AB  130C               	bcf	12,6	;volatile
+  1143  03AC                     l92:
+  1144  03AC  0008               	return
+  1145  03AD                     __end_of_setup:
+  1146                           
+  1147                           	psect	text2
+  1148  03E7                     __ptext2:	
+  1149 ;; *************** function _itoa *****************
+  1150 ;; Defined at:
+  1151 ;;		line 4 in file "C:\Program Files\Microchip\xc8\v2.35\pic\sources\c90\common\itoa.c"
+  1152 ;; Parameters:    Size  Location     Type
+  1153 ;;  buf             1    wreg     PTR unsigned char 
+  1154 ;;		 -> pot_char(1), 
+  1155 ;;  val             2    9[BANK0 ] int 
+  1156 ;;  base            2   11[BANK0 ] int 
+  1157 ;; Auto vars:     Size  Location     Type
+  1158 ;;  buf             1   14[BANK0 ] PTR unsigned char 
+  1159 ;;		 -> pot_char(1), 
+  1160 ;;  cp              1    0        PTR unsigned char 
+  1161 ;;		 -> pot_char(1), 
+  1162 ;; Return value:  Size  Location     Type
+  1163 ;;                  1    wreg      PTR unsigned char 
+  1164 ;; Registers used:
+  1165 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1166 ;; Tracked objects:
+  1167 ;;		On entry : 0/0
+  1168 ;;		On exit  : 0/0
+  1169 ;;		Unchanged: 0/0
+  1170 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1171 ;;      Params:         0       4       0       0       0
+  1172 ;;      Locals:         0       1       0       0       0
+  1173 ;;      Temps:          0       1       0       0       0
+  1174 ;;      Totals:         0       6       0       0       0
+  1175 ;;Total ram usage:        6 bytes
+  1176 ;; Hardware stack levels used: 1
+  1177 ;; Hardware stack levels required when called: 3
+  1178 ;; This function calls:
+  1179 ;;		_utoa
+  1180 ;; This function is called by:
+  1181 ;;		_main
+  1182 ;; This function uses a non-reentrant model
+  1183 ;;
+  1184                           
+  1185  03E7                     _itoa:	
+  1186                           ;psect for function _itoa
+  1187                           
+  1188                           
+  1189                           ;incstack = 0
+  1190                           ; Regs used in _itoa: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1191                           ;itoa@buf stored from wreg
+  1192  03E7  1283               	bcf	3,5	;RP0=0, select bank0
+  1193  03E8  1303               	bcf	3,6	;RP1=0, select bank0
+  1194  03E9  00AE               	movwf	itoa@buf
+  1195  03EA                     l1077:
+  1196  03EA                     l1079:
+  1197  03EA  1FAA               	btfss	itoa@val+1,7
+  1198  03EB  2BED               	goto	u461
+  1199  03EC  2BEE               	goto	u460
+  1200  03ED                     u461:
+  1201  03ED  2BFE               	goto	l1087
+  1202  03EE                     u460:
+  1203  03EE                     l1081:
+  1204  03EE  302D               	movlw	45
+  1205  03EF  00AD               	movwf	??_itoa
+  1206  03F0  082E               	movf	itoa@buf,w
+  1207  03F1  0084               	movwf	4
+  1208  03F2  082D               	movf	??_itoa,w
+  1209  03F3  1383               	bcf	3,7	;select IRP bank0
+  1210  03F4  0080               	movwf	0
+  1211  03F5                     l1083:
+  1212  03F5  3001               	movlw	1
+  1213  03F6  00AD               	movwf	??_itoa
+  1214  03F7  082D               	movf	??_itoa,w
+  1215  03F8  07AE               	addwf	itoa@buf,f
+  1216  03F9                     l1085:
+  1217  03F9  09A9               	comf	itoa@val,f
+  1218  03FA  09AA               	comf	itoa@val+1,f
+  1219  03FB  0AA9               	incf	itoa@val,f
+  1220  03FC  1903               	skipnz
+  1221  03FD  0AAA               	incf	itoa@val+1,f
+  1222  03FE                     l1087:
+  1223  03FE  082A               	movf	itoa@val+1,w
+  1224  03FF  00A1               	movwf	utoa@val+1
+  1225  0400  0829               	movf	itoa@val,w
+  1226  0401  00A0               	movwf	utoa@val
+  1227  0402  082C               	movf	itoa@base+1,w
+  1228  0403  00A3               	movwf	utoa@base+1
+  1229  0404  082B               	movf	itoa@base,w
+  1230  0405  00A2               	movwf	utoa@base
+  1231  0406  082E               	movf	itoa@buf,w
+  1232  0407  120A  118A  22B4  120A  118A  	fcall	_utoa
+  1233  040C                     l647:
+  1234  040C  0008               	return
+  1235  040D                     __end_of_itoa:
+  1236                           
+  1237                           	psect	text3
+  1238  02B4                     __ptext3:	
+  1239 ;; *************** function _utoa *****************
+  1240 ;; Defined at:
+  1241 ;;		line 17 in file "C:\Program Files\Microchip\xc8\v2.35\pic\sources\c90\common\itoa.c"
+  1242 ;; Parameters:    Size  Location     Type
+  1243 ;;  buf             1    wreg     PTR unsigned char 
+  1244 ;;		 -> pot_char(1), 
+  1245 ;;  val             2    0[BANK0 ] unsigned int 
+  1246 ;;  base            2    2[BANK0 ] int 
+  1247 ;; Auto vars:     Size  Location     Type
+  1248 ;;  buf             1    8[BANK0 ] PTR unsigned char 
+  1249 ;;		 -> pot_char(1), 
+  1250 ;;  v               2    5[BANK0 ] unsigned int 
+  1251 ;;  c               1    7[BANK0 ] unsigned char 
+  1252 ;; Return value:  Size  Location     Type
+  1253 ;;                  1    wreg      PTR unsigned char 
+  1254 ;; Registers used:
+  1255 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1256 ;; Tracked objects:
+  1257 ;;		On entry : 0/0
+  1258 ;;		On exit  : 0/0
+  1259 ;;		Unchanged: 0/0
+  1260 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1261 ;;      Params:         0       4       0       0       0
+  1262 ;;      Locals:         0       4       0       0       0
+  1263 ;;      Temps:          0       1       0       0       0
+  1264 ;;      Totals:         0       9       0       0       0
+  1265 ;;Total ram usage:        9 bytes
+  1266 ;; Hardware stack levels used: 1
+  1267 ;; Hardware stack levels required when called: 2
+  1268 ;; This function calls:
+  1269 ;;		___lwdiv
+  1270 ;;		___lwmod
+  1271 ;; This function is called by:
+  1272 ;;		_itoa
+  1273 ;; This function uses a non-reentrant model
+  1274 ;;
+  1275                           
+  1276  02B4                     _utoa:	
+  1277                           ;psect for function _utoa
+  1278                           
+  1279                           
+  1280                           ;incstack = 0
+  1281                           ; Regs used in _utoa: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1282                           ;utoa@buf stored from wreg
+  1283  02B4  1283               	bcf	3,5	;RP0=0, select bank0
+  1284  02B5  1303               	bcf	3,6	;RP1=0, select bank0
+  1285  02B6  00A8               	movwf	utoa@buf
+  1286  02B7                     l989:
+  1287  02B7  0821               	movf	utoa@val+1,w
+  1288  02B8  00A6               	movwf	utoa@v+1
+  1289  02B9  0820               	movf	utoa@val,w
+  1290  02BA  00A5               	movwf	utoa@v
+  1291  02BB                     l991:
+  1292  02BB  0823               	movf	utoa@base+1,w
+  1293  02BC  00F4               	movwf	___lwdiv@divisor+1
+  1294  02BD  0822               	movf	utoa@base,w
+  1295  02BE  00F3               	movwf	___lwdiv@divisor
+  1296  02BF  0826               	movf	utoa@v+1,w
+  1297  02C0  00F6               	movwf	___lwdiv@dividend+1
+  1298  02C1  0825               	movf	utoa@v,w
+  1299  02C2  00F5               	movwf	___lwdiv@dividend
+  1300  02C3  120A  118A  2326  120A  118A  	fcall	___lwdiv
+  1301  02C8  0874               	movf	?___lwdiv+1,w
+  1302  02C9  1283               	bcf	3,5	;RP0=0, select bank0
+  1303  02CA  1303               	bcf	3,6	;RP1=0, select bank0
+  1304  02CB  00A6               	movwf	utoa@v+1
+  1305  02CC  0873               	movf	?___lwdiv,w
+  1306  02CD  00A5               	movwf	utoa@v
+  1307  02CE                     l993:
+  1308  02CE  3001               	movlw	1
+  1309  02CF  00A4               	movwf	??_utoa
+  1310  02D0  0824               	movf	??_utoa,w
+  1311  02D1  07A8               	addwf	utoa@buf,f
+  1312  02D2                     l995:
+  1313  02D2  0825               	movf	utoa@v,w
+  1314  02D3  0426               	iorwf	utoa@v+1,w
+  1315  02D4  1D03               	btfss	3,2
+  1316  02D5  2AD7               	goto	u411
+  1317  02D6  2AD8               	goto	u410
+  1318  02D7                     u411:
+  1319  02D7  2ABB               	goto	l991
+  1320  02D8                     u410:
+  1321  02D8                     l997:
+  1322  02D8  0828               	movf	utoa@buf,w
+  1323  02D9  0084               	movwf	4
+  1324  02DA  1383               	bcf	3,7	;select IRP bank0
+  1325  02DB  0180               	clrf	0
+  1326  02DC                     l999:
+  1327  02DC  3001               	movlw	1
+  1328  02DD  02A8               	subwf	utoa@buf,f
+  1329  02DE                     l1001:
+  1330  02DE  0823               	movf	utoa@base+1,w
+  1331  02DF  00F4               	movwf	___lwmod@divisor+1
+  1332  02E0  0822               	movf	utoa@base,w
+  1333  02E1  00F3               	movwf	___lwmod@divisor
+  1334  02E2  0821               	movf	utoa@val+1,w
+  1335  02E3  00F6               	movwf	___lwmod@dividend+1
+  1336  02E4  0820               	movf	utoa@val,w
+  1337  02E5  00F5               	movwf	___lwmod@dividend
+  1338  02E6  120A  118A  23AD  120A  118A  	fcall	___lwmod
+  1339  02EB  0873               	movf	?___lwmod,w
+  1340  02EC  1283               	bcf	3,5	;RP0=0, select bank0
+  1341  02ED  1303               	bcf	3,6	;RP1=0, select bank0
+  1342  02EE  00A4               	movwf	??_utoa
+  1343  02EF  0824               	movf	??_utoa,w
+  1344  02F0  00A7               	movwf	utoa@c
+  1345  02F1                     l1003:
+  1346  02F1  0823               	movf	utoa@base+1,w
+  1347  02F2  00F4               	movwf	___lwdiv@divisor+1
+  1348  02F3  0822               	movf	utoa@base,w
+  1349  02F4  00F3               	movwf	___lwdiv@divisor
+  1350  02F5  0821               	movf	utoa@val+1,w
+  1351  02F6  00F6               	movwf	___lwdiv@dividend+1
+  1352  02F7  0820               	movf	utoa@val,w
+  1353  02F8  00F5               	movwf	___lwdiv@dividend
+  1354  02F9  120A  118A  2326  120A  118A  	fcall	___lwdiv
+  1355  02FE  0874               	movf	?___lwdiv+1,w
+  1356  02FF  1283               	bcf	3,5	;RP0=0, select bank0
+  1357  0300  1303               	bcf	3,6	;RP1=0, select bank0
+  1358  0301  00A1               	movwf	utoa@val+1
+  1359  0302  0873               	movf	?___lwdiv,w
+  1360  0303  00A0               	movwf	utoa@val
+  1361  0304                     l1005:
+  1362  0304  300A               	movlw	10
+  1363  0305  0227               	subwf	utoa@c,w
+  1364  0306  1C03               	skipc
+  1365  0307  2B09               	goto	u421
+  1366  0308  2B0A               	goto	u420
+  1367  0309                     u421:
+  1368  0309  2B0E               	goto	l653
+  1369  030A                     u420:
+  1370  030A                     l1007:
+  1371  030A  3007               	movlw	7
+  1372  030B  00A4               	movwf	??_utoa
+  1373  030C  0824               	movf	??_utoa,w
+  1374  030D  07A7               	addwf	utoa@c,f
+  1375  030E                     l653:
+  1376  030E  3030               	movlw	48
+  1377  030F  00A4               	movwf	??_utoa
+  1378  0310  0824               	movf	??_utoa,w
+  1379  0311  07A7               	addwf	utoa@c,f
+  1380  0312                     l1009:
+  1381  0312  0827               	movf	utoa@c,w
+  1382  0313  00A4               	movwf	??_utoa
+  1383  0314  0828               	movf	utoa@buf,w
+  1384  0315  0084               	movwf	4
+  1385  0316  0824               	movf	??_utoa,w
+  1386  0317  1383               	bcf	3,7	;select IRP bank0
+  1387  0318  0080               	movwf	0
+  1388  0319                     l1011:
+  1389  0319  3001               	movlw	1
+  1390  031A  02A8               	subwf	utoa@buf,f
+  1391  031B                     l1013:
+  1392  031B  0820               	movf	utoa@val,w
+  1393  031C  0421               	iorwf	utoa@val+1,w
+  1394  031D  1D03               	btfss	3,2
+  1395  031E  2B20               	goto	u431
+  1396  031F  2B21               	goto	u430
+  1397  0320                     u431:
+  1398  0320  2ADE               	goto	l1001
+  1399  0321                     u430:
+  1400  0321                     l1015:
+  1401                           
+  1402                           ;	Return value of _utoa is never used
+  1403  0321  3001               	movlw	1
+  1404  0322  00A4               	movwf	??_utoa
+  1405  0323  0824               	movf	??_utoa,w
+  1406  0324  07A8               	addwf	utoa@buf,f
+  1407  0325                     l655:
+  1408  0325  0008               	return
+  1409  0326                     __end_of_utoa:
+  1410                           
+  1411                           	psect	text4
+  1412  03AD                     __ptext4:	
+  1413 ;; *************** function ___lwmod *****************
+  1414 ;; Defined at:
+  1415 ;;		line 5 in file "C:\Program Files\Microchip\xc8\v2.35\pic\sources\c90\common\lwmod.c"
+  1416 ;; Parameters:    Size  Location     Type
+  1417 ;;  divisor         2    3[COMMON] unsigned int 
+  1418 ;;  dividend        2    5[COMMON] unsigned int 
+  1419 ;; Auto vars:     Size  Location     Type
+  1420 ;;  counter         1    8[COMMON] unsigned char 
+  1421 ;; Return value:  Size  Location     Type
+  1422 ;;                  2    3[COMMON] unsigned int 
+  1423 ;; Registers used:
+  1424 ;;		wreg, status,2, status,0
+  1425 ;; Tracked objects:
+  1426 ;;		On entry : 0/0
+  1427 ;;		On exit  : 0/0
+  1428 ;;		Unchanged: 0/0
+  1429 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1430 ;;      Params:         4       0       0       0       0
+  1431 ;;      Locals:         1       0       0       0       0
+  1432 ;;      Temps:          1       0       0       0       0
+  1433 ;;      Totals:         6       0       0       0       0
+  1434 ;;Total ram usage:        6 bytes
+  1435 ;; Hardware stack levels used: 1
+  1436 ;; Hardware stack levels required when called: 1
+  1437 ;; This function calls:
+  1438 ;;		Nothing
+  1439 ;; This function is called by:
+  1440 ;;		_utoa
+  1441 ;; This function uses a non-reentrant model
+  1442 ;;
+  1443                           
+  1444  03AD                     ___lwmod:	
+  1445                           ;psect for function ___lwmod
+  1446                           
+  1447  03AD                     l967:	
+  1448                           ;incstack = 0
+  1449                           ; Regs used in ___lwmod: [wreg+status,2+status,0]
+  1450                           
+  1451  03AD  0873               	movf	___lwmod@divisor,w
+  1452  03AE  0474               	iorwf	___lwmod@divisor+1,w
+  1453  03AF  1903               	btfsc	3,2
+  1454  03B0  2BB2               	goto	u351
+  1455  03B1  2BB3               	goto	u350
+  1456  03B2                     u351:
+  1457  03B2  2BE2               	goto	l985
+  1458  03B3                     u350:
+  1459  03B3                     l969:
+  1460  03B3  01F8               	clrf	___lwmod@counter
+  1461  03B4  0AF8               	incf	___lwmod@counter,f
+  1462  03B5  2BC1               	goto	l975
+  1463  03B6                     l971:
+  1464  03B6  3001               	movlw	1
+  1465  03B7                     u365:
+  1466  03B7  1003               	clrc
+  1467  03B8  0DF3               	rlf	___lwmod@divisor,f
+  1468  03B9  0DF4               	rlf	___lwmod@divisor+1,f
+  1469  03BA  3EFF               	addlw	-1
+  1470  03BB  1D03               	skipz
+  1471  03BC  2BB7               	goto	u365
+  1472  03BD                     l973:
+  1473  03BD  3001               	movlw	1
+  1474  03BE  00F7               	movwf	??___lwmod
+  1475  03BF  0877               	movf	??___lwmod,w
+  1476  03C0  07F8               	addwf	___lwmod@counter,f
+  1477  03C1                     l975:
+  1478  03C1  1FF4               	btfss	___lwmod@divisor+1,7
+  1479  03C2  2BC4               	goto	u371
+  1480  03C3  2BC5               	goto	u370
+  1481  03C4                     u371:
+  1482  03C4  2BB6               	goto	l971
+  1483  03C5                     u370:
+  1484  03C5                     l977:
+  1485  03C5  0874               	movf	___lwmod@divisor+1,w
+  1486  03C6  0276               	subwf	___lwmod@dividend+1,w
+  1487  03C7  1D03               	skipz
+  1488  03C8  2BCB               	goto	u385
+  1489  03C9  0873               	movf	___lwmod@divisor,w
+  1490  03CA  0275               	subwf	___lwmod@dividend,w
+  1491  03CB                     u385:
+  1492  03CB  1C03               	skipc
+  1493  03CC  2BCE               	goto	u381
+  1494  03CD  2BCF               	goto	u380
+  1495  03CE                     u381:
+  1496  03CE  2BD5               	goto	l981
+  1497  03CF                     u380:
+  1498  03CF                     l979:
+  1499  03CF  0873               	movf	___lwmod@divisor,w
+  1500  03D0  02F5               	subwf	___lwmod@dividend,f
+  1501  03D1  0874               	movf	___lwmod@divisor+1,w
+  1502  03D2  1C03               	skipc
+  1503  03D3  03F6               	decf	___lwmod@dividend+1,f
+  1504  03D4  02F6               	subwf	___lwmod@dividend+1,f
+  1505  03D5                     l981:
+  1506  03D5  3001               	movlw	1
+  1507  03D6                     u395:
+  1508  03D6  1003               	clrc
+  1509  03D7  0CF4               	rrf	___lwmod@divisor+1,f
+  1510  03D8  0CF3               	rrf	___lwmod@divisor,f
+  1511  03D9  3EFF               	addlw	-1
+  1512  03DA  1D03               	skipz
+  1513  03DB  2BD6               	goto	u395
+  1514  03DC                     l983:
+  1515  03DC  3001               	movlw	1
+  1516  03DD  02F8               	subwf	___lwmod@counter,f
+  1517  03DE  1D03               	btfss	3,2
+  1518  03DF  2BE1               	goto	u401
+  1519  03E0  2BE2               	goto	u400
+  1520  03E1                     u401:
+  1521  03E1  2BC5               	goto	l977
+  1522  03E2                     u400:
+  1523  03E2                     l985:
+  1524  03E2  0876               	movf	___lwmod@dividend+1,w
+  1525  03E3  00F4               	movwf	?___lwmod+1
+  1526  03E4  0875               	movf	___lwmod@dividend,w
+  1527  03E5  00F3               	movwf	?___lwmod
+  1528  03E6                     l475:
+  1529  03E6  0008               	return
+  1530  03E7                     __end_of___lwmod:
+  1531                           
+  1532                           	psect	text5
+  1533  0326                     __ptext5:	
+  1534 ;; *************** function ___lwdiv *****************
+  1535 ;; Defined at:
+  1536 ;;		line 5 in file "C:\Program Files\Microchip\xc8\v2.35\pic\sources\c90\common\lwdiv.c"
+  1537 ;; Parameters:    Size  Location     Type
+  1538 ;;  divisor         2    3[COMMON] unsigned int 
+  1539 ;;  dividend        2    5[COMMON] unsigned int 
+  1540 ;; Auto vars:     Size  Location     Type
+  1541 ;;  quotient        2    8[COMMON] unsigned int 
+  1542 ;;  counter         1   10[COMMON] unsigned char 
+  1543 ;; Return value:  Size  Location     Type
+  1544 ;;                  2    3[COMMON] unsigned int 
+  1545 ;; Registers used:
+  1546 ;;		wreg, status,2, status,0
+  1547 ;; Tracked objects:
+  1548 ;;		On entry : 0/0
+  1549 ;;		On exit  : 0/0
+  1550 ;;		Unchanged: 0/0
+  1551 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1552 ;;      Params:         4       0       0       0       0
+  1553 ;;      Locals:         3       0       0       0       0
+  1554 ;;      Temps:          1       0       0       0       0
+  1555 ;;      Totals:         8       0       0       0       0
+  1556 ;;Total ram usage:        8 bytes
+  1557 ;; Hardware stack levels used: 1
+  1558 ;; Hardware stack levels required when called: 1
+  1559 ;; This function calls:
+  1560 ;;		Nothing
+  1561 ;; This function is called by:
+  1562 ;;		_utoa
+  1563 ;; This function uses a non-reentrant model
+  1564 ;;
+  1565                           
+  1566  0326                     ___lwdiv:	
+  1567                           ;psect for function ___lwdiv
+  1568                           
+  1569  0326                     l941:	
+  1570                           ;incstack = 0
+  1571                           ; Regs used in ___lwdiv: [wreg+status,2+status,0]
+  1572                           
+  1573  0326  01F8               	clrf	___lwdiv@quotient
+  1574  0327  01F9               	clrf	___lwdiv@quotient+1
+  1575  0328                     l943:
+  1576  0328  0873               	movf	___lwdiv@divisor,w
+  1577  0329  0474               	iorwf	___lwdiv@divisor+1,w
+  1578  032A  1903               	btfsc	3,2
+  1579  032B  2B2D               	goto	u281
+  1580  032C  2B2E               	goto	u280
+  1581  032D                     u281:
+  1582  032D  2B65               	goto	l963
+  1583  032E                     u280:
+  1584  032E                     l945:
+  1585  032E  01FA               	clrf	___lwdiv@counter
+  1586  032F  0AFA               	incf	___lwdiv@counter,f
+  1587  0330  2B3C               	goto	l951
+  1588  0331                     l947:
+  1589  0331  3001               	movlw	1
+  1590  0332                     u295:
+  1591  0332  1003               	clrc
+  1592  0333  0DF3               	rlf	___lwdiv@divisor,f
+  1593  0334  0DF4               	rlf	___lwdiv@divisor+1,f
+  1594  0335  3EFF               	addlw	-1
+  1595  0336  1D03               	skipz
+  1596  0337  2B32               	goto	u295
+  1597  0338                     l949:
+  1598  0338  3001               	movlw	1
+  1599  0339  00F7               	movwf	??___lwdiv
+  1600  033A  0877               	movf	??___lwdiv,w
+  1601  033B  07FA               	addwf	___lwdiv@counter,f
+  1602  033C                     l951:
+  1603  033C  1FF4               	btfss	___lwdiv@divisor+1,7
+  1604  033D  2B3F               	goto	u301
+  1605  033E  2B40               	goto	u300
+  1606  033F                     u301:
+  1607  033F  2B31               	goto	l947
+  1608  0340                     u300:
+  1609  0340                     l953:
+  1610  0340  3001               	movlw	1
+  1611  0341                     u315:
+  1612  0341  1003               	clrc
+  1613  0342  0DF8               	rlf	___lwdiv@quotient,f
+  1614  0343  0DF9               	rlf	___lwdiv@quotient+1,f
+  1615  0344  3EFF               	addlw	-1
+  1616  0345  1D03               	skipz
+  1617  0346  2B41               	goto	u315
+  1618  0347  0874               	movf	___lwdiv@divisor+1,w
+  1619  0348  0276               	subwf	___lwdiv@dividend+1,w
+  1620  0349  1D03               	skipz
+  1621  034A  2B4D               	goto	u325
+  1622  034B  0873               	movf	___lwdiv@divisor,w
+  1623  034C  0275               	subwf	___lwdiv@dividend,w
+  1624  034D                     u325:
+  1625  034D  1C03               	skipc
+  1626  034E  2B50               	goto	u321
+  1627  034F  2B51               	goto	u320
+  1628  0350                     u321:
+  1629  0350  2B58               	goto	l959
+  1630  0351                     u320:
+  1631  0351                     l955:
+  1632  0351  0873               	movf	___lwdiv@divisor,w
+  1633  0352  02F5               	subwf	___lwdiv@dividend,f
+  1634  0353  0874               	movf	___lwdiv@divisor+1,w
+  1635  0354  1C03               	skipc
+  1636  0355  03F6               	decf	___lwdiv@dividend+1,f
+  1637  0356  02F6               	subwf	___lwdiv@dividend+1,f
+  1638  0357                     l957:
+  1639  0357  1478               	bsf	___lwdiv@quotient,0
+  1640  0358                     l959:
+  1641  0358  3001               	movlw	1
+  1642  0359                     u335:
+  1643  0359  1003               	clrc
+  1644  035A  0CF4               	rrf	___lwdiv@divisor+1,f
+  1645  035B  0CF3               	rrf	___lwdiv@divisor,f
+  1646  035C  3EFF               	addlw	-1
+  1647  035D  1D03               	skipz
+  1648  035E  2B59               	goto	u335
+  1649  035F                     l961:
+  1650  035F  3001               	movlw	1
+  1651  0360  02FA               	subwf	___lwdiv@counter,f
+  1652  0361  1D03               	btfss	3,2
+  1653  0362  2B64               	goto	u341
+  1654  0363  2B65               	goto	u340
+  1655  0364                     u341:
+  1656  0364  2B40               	goto	l953
+  1657  0365                     u340:
+  1658  0365                     l963:
+  1659  0365  0879               	movf	___lwdiv@quotient+1,w
+  1660  0366  00F4               	movwf	?___lwdiv+1
+  1661  0367  0878               	movf	___lwdiv@quotient,w
+  1662  0368  00F3               	movwf	?___lwdiv
+  1663  0369                     l465:
+  1664  0369  0008               	return
+  1665  036A                     __end_of___lwdiv:
+  1666                           
+  1667                           	psect	text6
+  1668  0456                     __ptext6:	
+  1669 ;; *************** function _desplegar *****************
+  1670 ;; Defined at:
+  1671 ;;		line 209 in file "postlab.c"
+  1672 ;; Parameters:    Size  Location     Type
+  1673 ;;  selection       1    wreg     unsigned char 
+  1674 ;; Auto vars:     Size  Location     Type
+  1675 ;;  selection       1    3[COMMON] unsigned char 
+  1676 ;; Return value:  Size  Location     Type
+  1677 ;;                  1    wreg      void 
+  1678 ;; Registers used:
+  1679 ;;		wreg
+  1680 ;; Tracked objects:
+  1681 ;;		On entry : 0/0
+  1682 ;;		On exit  : 0/0
+  1683 ;;		Unchanged: 0/0
+  1684 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1685 ;;      Params:         0       0       0       0       0
+  1686 ;;      Locals:         1       0       0       0       0
+  1687 ;;      Temps:          0       0       0       0       0
+  1688 ;;      Totals:         1       0       0       0       0
+  1689 ;;Total ram usage:        1 bytes
+  1690 ;; Hardware stack levels used: 1
+  1691 ;; Hardware stack levels required when called: 1
+  1692 ;; This function calls:
+  1693 ;;		Nothing
+  1694 ;; This function is called by:
+  1695 ;;		_main
+  1696 ;; This function uses a non-reentrant model
+  1697 ;;
+  1698                           
+  1699  0456                     _desplegar:	
+  1700                           ;psect for function _desplegar
+  1701                           
+  1702                           
+  1703                           ;incstack = 0
+  1704                           ; Regs used in _desplegar: [wreg]
+  1705                           ;desplegar@selection stored from wreg
+  1706  0456  00F3               	movwf	desplegar@selection
+  1707  0457                     l1091:
+  1708  0457                     l104:	
+  1709                           ;postlab.c: 210:     while (TXSTAbits.TRMT == 0);
+  1710                           
+  1711  0457  1683               	bsf	3,5	;RP0=1, select bank1
+  1712  0458  1303               	bcf	3,6	;RP1=0, select bank1
+  1713  0459  1C98               	btfss	24,1	;volatile
+  1714  045A  2C5C               	goto	u471
+  1715  045B  2C5D               	goto	u470
+  1716  045C                     u471:
+  1717  045C  2C57               	goto	l104
+  1718  045D                     u470:
+  1719  045D                     l1093:
+  1720                           
+  1721                           ;postlab.c: 211:     TXREG = selection;
+  1722  045D  0873               	movf	desplegar@selection,w
+  1723  045E  1283               	bcf	3,5	;RP0=0, select bank0
+  1724  045F  1303               	bcf	3,6	;RP1=0, select bank0
+  1725  0460  0099               	movwf	25	;volatile
+  1726  0461                     l107:
+  1727  0461  0008               	return
+  1728  0462                     __end_of_desplegar:
+  1729                           
+  1730                           	psect	text7
+  1731  040D                     __ptext7:	
+  1732 ;; *************** function _Print *****************
+  1733 ;; Defined at:
+  1734 ;;		line 198 in file "postlab.c"
+  1735 ;; Parameters:    Size  Location     Type
+  1736 ;;  word            2    3[COMMON] PTR unsigned char 
+  1737 ;;		 -> STR_10(8), STR_9(10), STR_8(58), STR_7(10), 
+  1738 ;;		 -> STR_6(34), STR_5(43), STR_4(27), STR_3(25), 
+  1739 ;;		 -> STR_2(43), STR_1(43), 
+  1740 ;; Auto vars:     Size  Location     Type
+  1741 ;;		None
+  1742 ;; Return value:  Size  Location     Type
+  1743 ;;                  1    wreg      void 
+  1744 ;; Registers used:
+  1745 ;;		wreg, fsr0l, fsr0h, btemp+1, pclath
+  1746 ;; Tracked objects:
+  1747 ;;		On entry : 0/0
+  1748 ;;		On exit  : 0/0
+  1749 ;;		Unchanged: 0/0
+  1750 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1751 ;;      Params:         2       0       0       0       0
+  1752 ;;      Locals:         0       0       0       0       0
+  1753 ;;      Temps:          0       0       0       0       0
+  1754 ;;      Totals:         2       0       0       0       0
+  1755 ;;Total ram usage:        2 bytes
+  1756 ;; Hardware stack levels used: 2
+  1757 ;; Hardware stack levels required when called: 1
+  1758 ;; This function calls:
+  1759 ;;		Nothing
+  1760 ;; This function is called by:
+  1761 ;;		_main
+  1762 ;; This function uses a non-reentrant model
+  1763 ;;
+  1764                           
+  1765  040D                     _Print:	
+  1766                           ;psect for function _Print
+  1767                           
+  1768  040D                     l1069:	
+  1769                           ;incstack = 0
+  1770                           ; Regs used in _Print: [wreg-fsr0h+btemp+1+pclath]
+  1771                           
+  1772                           
+  1773                           ;postlab.c: 198: void Print (unsigned char *word);postlab.c: 199: {;postlab.c: 200: whil
+      +                          e (*word != '\0')
+  1774  040D  2C22               	goto	l1075
+  1775  040E                     l97:
+  1776  040E  1E0C               	btfss	12,4	;volatile
+  1777  040F  2C11               	goto	u441
+  1778  0410  2C12               	goto	u440
+  1779  0411                     u441:
+  1780  0411  2C0E               	goto	l97
+  1781  0412                     u440:
+  1782  0412                     l1071:
+  1783                           
+  1784                           ;postlab.c: 203:     TXREG = *word;
+  1785  0412  0874               	movf	Print@word+1,w
+  1786  0413  00FF               	movwf	btemp+1
+  1787  0414  0873               	movf	Print@word,w
+  1788  0415  0084               	movwf	4
+  1789  0416  120A  118A  201A  120A  118A  	fcall	stringtab
+  1790  041B  0099               	movwf	25	;volatile
+  1791  041C                     l1073:
+  1792                           
+  1793                           ;postlab.c: 204:     *word++;
+  1794  041C  3001               	movlw	1
+  1795  041D  07F3               	addwf	Print@word,f
+  1796  041E  1803               	skipnc
+  1797  041F  0AF4               	incf	Print@word+1,f
+  1798  0420  3000               	movlw	0
+  1799  0421  07F4               	addwf	Print@word+1,f
+  1800  0422                     l1075:
+  1801                           
+  1802                           ;postlab.c: 200: while (*word != '\0')
+  1803  0422  0874               	movf	Print@word+1,w
+  1804  0423  1283               	bcf	3,5	;RP0=0, select bank0
+  1805  0424  1303               	bcf	3,6	;RP1=0, select bank0
+  1806  0425  00FF               	movwf	btemp+1
+  1807  0426  0873               	movf	Print@word,w
+  1808  0427  0084               	movwf	4
+  1809  0428  120A  118A  201A  120A  118A  	fcall	stringtab
+  1810  042D  3A00               	xorlw	0
+  1811  042E  1D03               	skipz
+  1812  042F  2C31               	goto	u451
+  1813  0430  2C32               	goto	u450
+  1814  0431                     u451:
+  1815  0431  2C0E               	goto	l97
+  1816  0432                     u450:
+  1817  0432                     l101:
+  1818  0432  0008               	return
+  1819  0433                     __end_of_Print:
+  1820                           
+  1821                           	psect	text8
+  1822  0433                     __ptext8:	
+  1823 ;; *************** function _isr *****************
+  1824 ;; Defined at:
+  1825 ;;		line 66 in file "postlab.c"
+  1826 ;; Parameters:    Size  Location     Type
+  1827 ;;		None
+  1828 ;; Auto vars:     Size  Location     Type
+  1829 ;;		None
+  1830 ;; Return value:  Size  Location     Type
+  1831 ;;                  1    wreg      void 
+  1832 ;; Registers used:
+  1833 ;;		wreg, status,2, status,0
+  1834 ;; Tracked objects:
+  1835 ;;		On entry : 0/0
+  1836 ;;		On exit  : 0/0
+  1837 ;;		Unchanged: 0/0
+  1838 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1839 ;;      Params:         0       0       0       0       0
+  1840 ;;      Locals:         0       0       0       0       0
+  1841 ;;      Temps:          3       0       0       0       0
+  1842 ;;      Totals:         3       0       0       0       0
+  1843 ;;Total ram usage:        3 bytes
+  1844 ;; Hardware stack levels used: 1
+  1845 ;; This function calls:
+  1846 ;;		Nothing
+  1847 ;; This function is called by:
+  1848 ;;		Interrupt level 1
+  1849 ;; This function uses a non-reentrant model
+  1850 ;;
+  1851                           
+  1852  0433                     _isr:	
+  1853                           ;psect for function _isr
+  1854                           
+  1855  0433                     i1l1095:
+  1856                           
+  1857                           ;postlab.c: 68:     if(PIR1bits.RCIF){
+  1858  0433  1283               	bcf	3,5	;RP0=0, select bank0
+  1859  0434  1303               	bcf	3,6	;RP1=0, select bank0
+  1860  0435  1E8C               	btfss	12,5	;volatile
+  1861  0436  2C38               	goto	u48_21
+  1862  0437  2C39               	goto	u48_20
+  1863  0438                     u48_21:
+  1864  0438  2C3D               	goto	i1l1099
+  1865  0439                     u48_20:
+  1866  0439                     i1l1097:
+  1867                           
+  1868                           ;postlab.c: 69:         RX = RCREG;
+  1869  0439  081A               	movf	26,w	;volatile
+  1870  043A  00F0               	movwf	??_isr
+  1871  043B  0870               	movf	??_isr,w
+  1872  043C  00B2               	movwf	_RX
+  1873  043D                     i1l1099:
+  1874                           
+  1875                           ;postlab.c: 72:     if (PIR1bits.ADIF)
+  1876  043D  1F0C               	btfss	12,6	;volatile
+  1877  043E  2C40               	goto	u49_21
+  1878  043F  2C41               	goto	u49_20
+  1879  0440                     u49_21:
+  1880  0440  2C4F               	goto	i1l66
+  1881  0441                     u49_20:
+  1882  0441                     i1l1101:
+  1883                           
+  1884                           ;postlab.c: 73:     {;postlab.c: 74:          if (ADCON0bits.CHS == 0b0000){
+  1885  0441  0C1F               	rrf	31,w	;volatile
+  1886  0442  00F0               	movwf	??_isr
+  1887  0443  0C70               	rrf	??_isr,w
+  1888  0444  390F               	andlw	15
+  1889  0445  3A00               	xorlw	0
+  1890  0446  1D03               	skipz
+  1891  0447  2C49               	goto	u50_21
+  1892  0448  2C4A               	goto	u50_20
+  1893  0449                     u50_21:
+  1894  0449  2C4E               	goto	i1l1105
+  1895  044A                     u50_20:
+  1896  044A                     i1l1103:
+  1897                           
+  1898                           ;postlab.c: 75:              pot = ADRESH;
+  1899  044A  081E               	movf	30,w	;volatile
+  1900  044B  00F0               	movwf	??_isr
+  1901  044C  0870               	movf	??_isr,w
+  1902  044D  00B1               	movwf	_pot
+  1903  044E                     i1l1105:
+  1904                           
+  1905                           ;postlab.c: 79:         PIR1bits.ADIF = 0;
+  1906  044E  130C               	bcf	12,6	;volatile
+  1907  044F                     i1l66:
+  1908  044F  0872               	movf	??_isr+2,w
+  1909  0450  008A               	movwf	10
+  1910  0451  0E71               	swapf	??_isr+1,w
+  1911  0452  0083               	movwf	3
+  1912  0453  0EFE               	swapf	btemp,f
+  1913  0454  0E7E               	swapf	btemp,w
+  1914  0455  0009               	retfie
+  1915  0456                     __end_of_isr:
+  1916  007E                     btemp	set	126	;btemp
+  1917  007E                     wtemp0	set	126
+  1918                           
+  1919                           	psect	intentry
+  1920  0004                     __pintentry:	
+  1921                           ;incstack = 0
+  1922                           ; Regs used in _isr: [wreg+status,2+status,0]
+  1923                           
+  1924  0004                     interrupt_function:
+  1925  007E                     saved_w	set	btemp
+  1926  0004  00FE               	movwf	btemp
+  1927  0005  0E03               	swapf	3,w
+  1928  0006  00F1               	movwf	??_isr+1
+  1929  0007  080A               	movf	10,w
+  1930  0008  00F2               	movwf	??_isr+2
+  1931  0009  120A  118A  2C33   	ljmp	_isr
+  1932                           
+  1933                           	psect	idloc
+  1934                           
+  1935                           ;Config register IDLOC0 @ 0x2000
+  1936                           ;	unspecified, using default values
+  1937  2000                     	org	8192
+  1938  2000  3FFF               	dw	16383
+  1939                           
+  1940                           ;Config register IDLOC1 @ 0x2001
+  1941                           ;	unspecified, using default values
+  1942  2001                     	org	8193
+  1943  2001  3FFF               	dw	16383
+  1944                           
+  1945                           ;Config register IDLOC2 @ 0x2002
+  1946                           ;	unspecified, using default values
+  1947  2002                     	org	8194
+  1948  2002  3FFF               	dw	16383
+  1949                           
+  1950                           ;Config register IDLOC3 @ 0x2003
+  1951                           ;	unspecified, using default values
+  1952  2003                     	org	8195
+  1953  2003  3FFF               	dw	16383
+  1954                           
+  1955                           	psect	config
+  1956                           
+  1957                           ;Config register CONFIG1 @ 0x2007
+  1958                           ;	Oscillator Selection bits
+  1959                           ;	FOSC = INTRC_NOCLKOUT, INTOSCIO oscillator: I/O function on RA6/OSC2/CLKOUT pin, I/O f
+      +                          unction on RA7/OSC1/CLKIN
+  1960                           ;	Watchdog Timer Enable bit
+  1961                           ;	WDTE = OFF, WDT disabled and can be enabled by SWDTEN bit of the WDTCON register
+  1962                           ;	Power-up Timer Enable bit
+  1963                           ;	PWRTE = OFF, PWRT disabled
+  1964                           ;	RE3/MCLR pin function select bit
+  1965                           ;	MCLRE = OFF, RE3/MCLR pin function is digital input, MCLR internally tied to VDD
+  1966                           ;	Code Protection bit
+  1967                           ;	CP = OFF, Program memory code protection is disabled
+  1968                           ;	Data Code Protection bit
+  1969                           ;	CPD = OFF, Data memory code protection is disabled
+  1970                           ;	Brown Out Reset Selection bits
+  1971                           ;	BOREN = OFF, BOR disabled
+  1972                           ;	Internal External Switchover bit
+  1973                           ;	IESO = OFF, Internal/External Switchover mode is disabled
+  1974                           ;	Fail-Safe Clock Monitor Enabled bit
+  1975                           ;	FCMEN = OFF, Fail-Safe Clock Monitor is disabled
+  1976                           ;	Low Voltage Programming Enable bit
+  1977                           ;	LVP = OFF, RB3 pin has digital I/O, HV on MCLR must be used for programming
+  1978                           ;	In-Circuit Debugger Mode bit
+  1979                           ;	DEBUG = 0x1, unprogrammed default
+  1980  2007                     	org	8199
+  1981  2007  20D4               	dw	8404
+  1982                           
+  1983                           ;Config register CONFIG2 @ 0x2008
+  1984                           ;	Brown-out Reset Selection bit
+  1985                           ;	BOR4V = BOR40V, Brown-out Reset set to 4.0V
+  1986                           ;	Flash Program Memory Self Write Enable bits
+  1987                           ;	WRT = OFF, Write protection off
+  1988  2008                     	org	8200
+  1989  2008  3FFF               	dw	16383
+
+Data Sizes:
+    Strings     248
+    Constant    0
+    Data        0
+    BSS         5
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMMON           14     11      11
+    BANK0            80     17      22
+    BANK1            80      0       0
+    BANK3            96      0       0
+    BANK2            96      0       0
+
+Pointer List with Targets:
+
+    utoa@buf	PTR unsigned char  size(1) Largest target is 1
+		 -> pot_char(BANK0[1]), 
+
+    sp__utoa	PTR unsigned char  size(1) Largest target is 1
+		 -> pot_char(BANK0[1]), 
+
+    itoa@buf	PTR unsigned char  size(1) Largest target is 1
+		 -> pot_char(BANK0[1]), 
+
+    itoa@cp	PTR unsigned char  size(1) Largest target is 1
+		 -> pot_char(BANK0[1]), 
+
+    Print@word	PTR unsigned char  size(2) Largest target is 58
+		 -> STR_10(CODE[8]), STR_9(CODE[10]), STR_8(CODE[58]), STR_7(CODE[10]), 
+		 -> STR_6(CODE[34]), STR_5(CODE[43]), STR_4(CODE[27]), STR_3(CODE[25]), 
+		 -> STR_2(CODE[43]), STR_1(CODE[43]), 
+
+    sp__itoa	PTR unsigned char  size(1) Largest target is 1
+		 -> pot_char(BANK0[1]), 
+
+
+Critical Paths under _main in COMMON
+
+    _utoa->___lwdiv
+
+Critical Paths under _isr in COMMON
+
+    None.
+
+Critical Paths under _main in BANK0
+
+    _main->_itoa
+    _itoa->_utoa
+
+Critical Paths under _isr in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _isr in BANK1
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _isr in BANK3
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _isr in BANK2
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 2     2      0    2439
+                                             15 BANK0      2     2      0
+                              _Print
+                          _desplegar
+                               _itoa
+                              _setup
+ ---------------------------------------------------------------------------------
+ (1) _setup                                                1     1      0       0
+                                              3 COMMON     1     1      0
+ ---------------------------------------------------------------------------------
+ (1) _itoa                                                 7     3      4    1612
+                                              9 BANK0      6     2      4
+                               _utoa
+ ---------------------------------------------------------------------------------
+ (2) _utoa                                                 9     5      4    1264
+                                              0 BANK0      9     5      4
+                            ___lwdiv
+                            ___lwmod
+ ---------------------------------------------------------------------------------
+ (3) ___lwmod                                              6     2      4     311
+                                              3 COMMON     6     2      4
+ ---------------------------------------------------------------------------------
+ (3) ___lwdiv                                              8     4      4     466
+                                              3 COMMON     8     4      4
+ ---------------------------------------------------------------------------------
+ (1) _desplegar                                            1     1      0      22
+                                              3 COMMON     1     1      0
+ ---------------------------------------------------------------------------------
+ (2) _Print                                                2     0      2     805
+                                              3 COMMON     2     0      2
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (4) _isr                                                  3     3      0       0
+                                              0 COMMON     3     3      0
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 4
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _Print
+   _desplegar
+   _itoa
+     _utoa
+       ___lwdiv
+       ___lwmod
+   _setup
+
+ _isr (ROOT)
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BITCOMMON            E      0       0       0        0.0%
+EEDATA             100      0       0       0        0.0%
+NULL                 0      0       0       0        0.0%
+CODE                 0      0       0       0        0.0%
+COMMON               E      B       B       1       78.6%
+BITSFR0              0      0       0       1        0.0%
+SFR0                 0      0       0       1        0.0%
+BITSFR1              0      0       0       2        0.0%
+SFR1                 0      0       0       2        0.0%
+STACK                0      0       0       2        0.0%
+ABS                  0      0      21       3        0.0%
+BITBANK0            50      0       0       4        0.0%
+BITSFR3              0      0       0       4        0.0%
+SFR3                 0      0       0       4        0.0%
+BANK0               50     11      16       5       27.5%
+BITSFR2              0      0       0       5        0.0%
+SFR2                 0      0       0       5        0.0%
+BITBANK1            50      0       0       6        0.0%
+BANK1               50      0       0       7        0.0%
+BITBANK3            60      0       0       8        0.0%
+BANK3               60      0       0       9        0.0%
+BITBANK2            60      0       0      10        0.0%
+BANK2               60      0       0      11        0.0%
+DATA                 0      0      21      12        0.0%
+
+
+Microchip Technology PIC Macro Assembler V2.35 build 20211206165544 
+Symbol Table                                                                                   Sat May 07 22:06:32 2022
+
+                      pc 0002                       l82 0277                       l75 0236  
+                     l92 03AC                       l97 040E                       _RX 0032  
+                     fsr 0004                      l101 0432                      l104 0457  
+                    l107 0461                      l465 0369                      l475 03E6  
+                    l653 030E                      l655 0325                      l647 040C  
+                    l941 0326                      l951 033C                      l943 0328  
+                    l961 035F                      l953 0340                      l945 032E  
+                    l955 0351                      l947 0331                      l963 0365  
+                    l971 03B6                      l957 0357                      l949 0338  
+                    l981 03D5                      l973 03BD                      l959 0358  
+                    l983 03DC                      l975 03C1                      l967 03AD  
+                    l991 02BB                      l977 03C5                      l969 03B3  
+                    l985 03E2                      l993 02CE                      l979 03CF  
+                    l995 02D2                      l997 02D8                      l989 02B7  
+                    l999 02DC       desplegar@selection 0073                      u300 0340  
+                    u301 033F                      u320 0351                      u400 03E2  
+                    u321 0350                      u401 03E1                      u410 02D8  
+                    u315 0341                      u411 02D7                      u340 0365  
+                    u420 030A                      u341 0364                      u325 034D  
+                    u421 0309                      u350 03B3                      u430 0321  
+                    u510 0203                      u335 0359                      u351 03B2  
+                    u431 0320                      u511 0202                      u440 0412  
+                    u280 032E                      u520 023A                      u441 0411  
+                    u281 032D                      u521 0239                      u450 0432  
+                    u370 03C5                      u530 027D                      u451 0431  
+                    u371 03C4                      u531 027C                      u380 03CF  
+                    u460 03EE                      u540 02B0                      u381 03CE  
+                    u365 03B7                      u461 03ED                      u541 02AF  
+                    u470 045D                      u471 045C                      u295 0332  
+                    u385 03CB                      u395 03D6                      u557 03A0  
+                    _isr 0433                      _pot 0031                      fsr0 0004  
+                    indf 0000                     l1001 02DE                     l1011 0319  
+                   l1003 02F1                     l1013 031B                     l1005 0304  
+                   l1021 036E                     l1015 0321                     l1007 030A  
+                   l1031 037C                     l1023 036F                     l1111 0203  
+                   l1009 0312                     l1041 0386                     l1033 037D  
+                   l1025 0372                     l1121 0248                     l1113 0204  
+                   l1051 0393                     l1043 0389                     l1035 037E  
+                   l1027 0375                     l1019 036A                     l1131 027D  
+                   l1123 025B                     l1115 0231                     l1107 01F8  
+                   l1061 03A4                     l1053 0394                     l1045 038C  
+                   l1037 0381                     l1029 037B                     l1133 027F  
+                   l1125 0261                     l1141 0299                     l1117 023A  
+                   l1109 01FD                     l1071 0412                     l1063 03A5  
+                   l1055 039D                     l1047 038D                     l1039 0385  
+                   l1135 0285                     l1127 026A                     l1119 023F  
+                   l1143 02A9                     l1073 041C                     l1081 03EE  
+                   l1065 03A8                     l1057 039E                     l1049 0390  
+                   l1129 026E                     l1075 0422                     l1091 0457  
+                   l1083 03F5                     l1067 03A9                     l1059 03A3  
+                   l1139 028F                     l1069 040D                     l1093 045D  
+                   l1085 03F9                     l1077 03EA                     l1087 03FE  
+                   l1079 03EA                     l1169 02A1                     ?_isr 0070  
+                   STR_1 013A                     STR_2 0165                     STR_3 01CD  
+                   STR_4 01B2                     STR_5 013A                     STR_6 0190  
+                   STR_7 01E6                     STR_8 0100                     STR_9 01E6  
+                   i1l66 044F                     _TXIF 0064                     _flag 0034  
+                   _main 01F8                     _itoa 03E7                     btemp 007E  
+                   _utoa 02B4                     start 000C                    ??_isr 0070  
+                  ?_main 0070                    ?_itoa 0029                    STR_10 01F0  
+                  _ANSEL 0188                    ?_utoa 0020          __end_of___lwdiv 036A  
+        __end_of___lwmod 03E7                    _RCREG 001A                    u50_20 044A  
+                  u50_21 0449                    _SPBRG 0099                    _PORTB 0006  
+                  u48_20 0439                    u48_21 0438                    u49_20 0441  
+                  u49_21 0440                    _TRISB 0086                    _TXREG 0019  
+                  _Print 040D                    _setup 036A                    pclath 000A  
+                  utoa@c 0027                    utoa@v 0025                    status 0003  
+                  wtemp0 007E          __initialization 000F             __end_of_main 02B4  
+           __end_of_itoa 040D             __end_of_utoa 0326                   ??_main 002F  
+                 ??_itoa 002D                   ??_utoa 0024                   ?_Print 0073  
+                 _ADRESH 001E                   ?_setup 0070                   _ANSELH 0189  
+                 i1l1101 0441                   i1l1103 044A                   i1l1105 044E  
+                 i1l1095 0433                   i1l1097 0439                   i1l1099 043D  
+                 _SPBRGH 009A                ??___lwdiv 0077                ??___lwmod 0077  
+                 saved_w 007E  __end_of__initialization 0016           __pcstackCOMMON 0070  
+          __end_of_Print 0433            __end_of_setup 03AD                  ??_Print 0075  
+                ??_setup 0073               __pbssBANK0 0031               __pmaintext 01F8  
+             __pintentry 0004               __stringtab 001A        __end_of_desplegar 0462  
+                ___lwdiv 0326                  ___lwmod 03AD                  __ptext1 036A  
+                __ptext2 03E7                  __ptext3 02B4                  __ptext4 03AD  
+                __ptext5 0326                  __ptext6 0456                  __ptext7 040D  
+                __ptext8 0433     end_of_initialization 0016                  itoa@buf 002E  
+                itoa@val 0029                _RCSTAbits 0018             __pstringtext 0100  
+                utoa@buf 0028                  utoa@val 0020                _TXSTAbits 0098  
+            _BAUDCTLbits 0187      start_initialization 000F              __end_of_isr 0456  
+              Print@word 0073                ___latbits 0002            __pcstackBANK0 0020  
+       ___lwdiv@dividend 0075                 ?___lwdiv 0073                 ?___lwmod 0073  
+              _desplegar 0456                __pstrings 001A         ___lwdiv@quotient 0078  
+      interrupt_function 0004                 _PIE1bits 008C                _selection 0033  
+               _PIR1bits 000C               ?_desplegar 0070               _ADCON0bits 001F  
+            __stringbase 002C               _ADCON1bits 009F       __end_of__stringtab 002C  
+        ___lwdiv@divisor 0073          ___lwdiv@counter 007A                 _pot_char 0035  
+            ??_desplegar 0073               _INTCONbits 000B                 itoa@base 002B  
+               intlevel1 0000         ___lwmod@dividend 0075                stringcode 0024  
+             _OSCCONbits 008F                 utoa@base 0022          ___lwmod@divisor 0073  
+        ___lwmod@counter 0078                 stringtab 001A  
